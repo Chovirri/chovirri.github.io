@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    /* Color de fondo del cuerpo */
+}
+
+header {
+    background-color: #FFB74D;
+    /* Color de fondo del encabezado */
+    color: #fff;
+    /* Color de texto del encabezado */
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #333;
+    /* Color de los títulos de sección */
+}
+
+p {
+    line-height: 1.6;
+}
+
+footer {
+    background-color: #333;
+    /* Color de fondo del pie de página */
+    color: #fff;
+    /* Color de texto del pie de página */
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    /* Para que el pie de página esté siempre abajo */
+    bottom: 0;
+    width: 100%;
+}
+
+.title {
+    font-size: 2em;
+    text-align: center;
+    color: #FF6347;
+    /* Cambia el color del título aquí */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to right, #b61d0c, #1b35b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 1.10;
+    /* Ajusta la opacidad del título aquí */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    /* Ajusta el margen para que las redes sociales no queden demasiado cerca del título */
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    /* Le da un poco de énfasis al texto de las redes sociales */
+}
+
+p {
+    line-height: 1.6;
+    font-family: 'Times New Roman', serif;
+    /* Cambia la fuente aquí */
+}
+.loading-text {
+    text-align: center; 
+    font-size: 1em; /* Ajusta el tamaño de la fuente si es necesario */
+    color: #000000; /* El color que deseas para el texto */
+    animation: bubbleUp 5s ease-in-out forwards; /* Ajusta la duración de la animación */
+}
+
+.loading-text.animated { /* Agrega esta clase para los estilos de animación */
+    transform: translateY(100%);
+    opacity: 1;
+}
+
+@keyframes bubbleUp {
+    0% {
+        transform: translateY(100%); /* Empieza fuera de la vista */
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0); /* Termina en su posición original */
+        opacity: 1;
+    }
+}
