@@ -85,7 +85,7 @@ p {
     text-align: center; 
     font-size: 1em; /* Ajusta el tamaño de la fuente si es necesario */
     color: #000000; /* El color que deseas para el texto */
-    animation: bubbleUp 5s ease-in-out forwards; /* Ajusta la duración de la animación */
+    animation: bubbleUp 3s ease-in-out forwards; /* Ajusta la duración de la animación */
 }
 
 .loading-text.animated { /* Agrega esta clase para los estilos de animación */
@@ -102,4 +102,17 @@ p {
         transform: translateY(0); /* Termina en su posición original */
         opacity: 1;
     }
+}
+.about-image { 
+    width: 100%; /* Ajusta el ancho de la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    display: block;  /*  Asegúrate de que la imagen se muestre como bloque */
+}
+.boton-productos {
+    background-color: green; /* Color de fondo verde */
+    color: white; /* Color de texto blanco */
+    padding: 10px 20px; /* Espacio interno */
+    text-decoration: none; /* Eliminar subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    display: inline-block; /* Mostrar como bloque en línea */
 }
