@@ -180,4 +180,40 @@ p {
     background-color: #28a745; /* Verde */
     color: white;
 }
+.card {
+    width: 300px; /* Ancho fijo para las tarjetas */
+    overflow: hidden; /* Oculta cualquier contenido que exceda el ancho de la tarjeta */
+    border-radius: 10px; /* Bordes redondeados para las tarjetas */
+    box-shadow: 0 4px 6px 8px rgba(0, 0, 0, 0, 0.1); /* Sombra suave para las tarjetas */
+    margin: 20px; /* Espacio alrededor de cada tarjeta */
+}
+
+.card-image {
+    width: 100%; /* Hace que la imagen ocupe todo el ancho disponible */
+    height: auto; /* Altura automática para mantener la proporción de la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra completamente el espacio asignado */
+    border-radius: 10px; /* Bordes redondeados para las imágenes también */
+}
+
+.info {
+    padding: 20px; /* Espacio interior alrededor del texto y botón */
+}
+
+.btn {
+    background-color: #007bff; /* Color de fondo para los botones */
+    color: white; /* Color de texto para los botones */
+    border: none; /* Sin bordes para los botones */
+    padding: 10px 20px; /* Espacio interior de los botones */
+    cursor: pointer; /* Cursor en forma de mano para indicar que es clickeable */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Cambio de color al pasar el mouse sobre el botón */
+}
+
+/* Estilos adicionales para mejorar la apariencia visual */
+.card-image:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse sobre las imágenes */
+}
 
