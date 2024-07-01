@@ -154,3 +154,26 @@ p {
 .comprar-btn:hover {
     background-color: #0056b3;
 }
+.btn {
+    background-color: #ff6347; /* Naranja */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn:hover {
+    background-color: #ee3124; /* Naranja más oscuro */
+    transform: scale(1.05); /* Efecto de "levantamiento" */
+}
+
+.btn i {
+    margin-left: 5px;
+}
+
