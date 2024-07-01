@@ -121,3 +121,36 @@ p {
     border-radius: 10px; /* Agrega bordes redondeados a la imagen */
     object-fit: cover; /* Asegura que la imagen cubra completamente el espacio de la tarjeta */
 }
+.card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px;
+    width: 300px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+}
+
+.info {
+    padding: 16px;
+    text-align: center;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.comprar-btn:hover {
+    background-color: #0056b3;
+}
