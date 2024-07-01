@@ -176,4 +176,8 @@ p {
 .btn i {
     margin-left: 5px;
 }
+.success {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
 
