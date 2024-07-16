@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8; /* Fondo suave */
+        }
+
+        header {
+            background-color: #0056b3; /* Azul oscuro */
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 2rem;
+            color: #28a745;
+            margin: 40px 0;
+            animation: fadeIn 2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .product-detail {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+        }
+
+        #product-image {
+            width: 150px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+
+        #qr-image {
+            width: 180px;
+            height: auto;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: width 0.3s;
+        }
+
+        .product-details h3 {
+            margin: 0;
+        }
+
+        .product-details p {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0056b3;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .department-table {
+            border-collapse: collapse;
+            margin-left: 20px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .department-table th, .department-table td {
+            border: 1px solid #007bff;
+            padding: 12px;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+
+        .department-table th {
+            background-color: #e9ecef;
+            color: #0056b3;
+        }
+
+        .department-table tr:hover {
+            background-color: #d1ecf1;
+        }
+
+        .selected {
+            background-color: #c3e6cb;
+            font-weight: bold;
+        }
+
+        .title {
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body onload="cargarProducto()">
+    <header>
+        <h1>Tua Ta UYPI</h1>
+    </header>
+
+    <div class="message">¡Gracias por preferir nuestro producto!</div>
+
+    <main>
+        <div class="container">
+            <section id="product-detail" class="product-detail">
+                <h2>Detalle del Producto</h2>
+                <div class="product-info">
+                    <img id="product-image" src="https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/13.jpeg?raw=true" alt="Imagen del producto">
+                    <div class="product-details">
+                        <h3 id="product-name">Nombre del Producto</h3>
+                        <p id="product-price">$0.00</p>
+                        <img id="qr-image" src="https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/qr.jpeg?raw=true" alt="QR para pagar" onclick="enlargeQR()">
+                        <a href="https://wa.me/1234567890" target="_blank" class="btn">Enviar Comprobante de Pago</a>
+                    </div>
+                </div>
+            </section>
+
+            <div>
+                <div class="title">¿Dónde se encuentra?</div>
+                <table class="department-table">
+                    <thead>
+                        <tr>
+                            <th>Departamento</th>
+                            <th>Costo de Envío</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="updatePrice(10, this)">
+                            <td>La Paz</td>
+                            <td>$10.00</td>
+                        </tr>
+                        <tr onclick="updatePrice(12, this)">
+                            <td>Santa Cruz</td>
+                            <td>$12.00</td>
+                        </tr>
+                        <tr onclick="updatePrice(15, this)">
+                            <td>Sucre</td>
+                            <td>$15.00</td>
+                        </tr>
+                        <tr onclick="updatePrice(8, this)">
+                            <td>Cochabamba</td>
+                            <td>$8.00</td>
+                        </tr>
+                        <tr onclick="updatePrice(14, this)">
+                            <td>Tarija</td>
+                            <td>$14.00</td>
+                        </tr>
+                        <tr onclick="updatePrice(9, this)">
+                            <td>Oruro</td>
+                            <td>$9.00</td>
+                        </tr>
+                        <tr onclick="updatePrice(11, this)">
+                            <td>Potosí</td>
+                            <td>$11.00</td>
+                        </tr>
+                        <tr onclick="updatePrice(7, this)">
+                            <td>Beni</td>
+                            <td>$7.00</td>
+                        </tr>
+                        <tr onclick="updatePrice(6, this)">
+                            <td>Pando</td>
+                            <td>$6.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Tua Ta UYPI</p>
+    </footer>
+
+    <script>
+        function enlargeQR() {
+            const qrImage = document.getElementById('qr-image');
+            qrImage.style.width = qrImage.style.width === '180px' ? '216px' : '180px';
+        }
+
+        function updatePrice(shippingCost, row) {
+            const productPriceElement = document.getElementById('product-price');
+            const basePrice = parseFloat(new URLSearchParams(window.location.search).get('precio')) || 50; // Precio base del producto desde URL o por defecto
+            const totalPrice = basePrice + shippingCost;
+            productPriceElement.innerText = `$${totalPrice.toFixed(2)}`;
+
+            // Resaltar fila seleccionada
+            const rows = document.querySelectorAll('.department-table tr');
+            rows.forEach(r => r.classList.remove('selected')); // Quitar selección de filas
+            row.classList.add('selected'); // Agregar clase de selección
+        }
+
+        function cargarProducto() {
+            const params = new URLSearchParams(window.location.search);
+            const producto = params.get('producto');
+            const precio = params.get('precio');
+            const productoImagen = {
+                'Miel de señorita': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/13.jpeg?raw=true',
+                'Propoleo de melipona': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/20.jpeg?raw=true',
+                'Miel de Eucalipto': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/3.jpeg?raw=true',
+                'Jalea Real': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/4.jpeg?raw=true',
+                'Polen de Abeja': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/5.jpeg?raw=true',
+                'Miel Multifloral': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/6.jpeg?raw=true',
+            };
+
+            if (producto && precio) {
+                document.getElementById('product-name').innerText = producto;
+                document.getElementById('product-price').innerText = `$${parseFloat(precio).toFixed(2)}`;
+                document.getElementById('product-image').src = productoImagen[producto] || 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/default.jpeg?raw=true';
+            }
+        }
+    </script>
+</body>
+</html>
