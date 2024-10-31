@@ -1,279 +1,232 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un mensaje especial</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Lobster&family=Satisfy&family=Caveat&family=Indie+Flower&family=Amatic+SC&family=Shadows+Into+Light&family=Permanent+Marker&family=Courgette&family=Kaushan+Script&family=Great+Vibes&family=Sacramento&family=Tangerine&family=Allura&family=Pinyon+Script&family=Mr+Dafoe&family=Yellowtail&family=Petit+Formal+Script&family=Clicker+Script&display=swap');
-        
-        body, html {
+        body {
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background: #000;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            perspective: 1000px;
         }
-        
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
         .star {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #fff;
+            background: white;
             border-radius: 50%;
-            animation: twinkle 1s infinite alternate;
+            animation: twinkle var(--duration) infinite;
         }
-        
+
         @keyframes twinkle {
-            from { opacity: 0.5; }
-            to { opacity: 1; }
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
         }
-        
-        .content {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            opacity: 0;
-            transition: opacity 2s;
-        }
-        
-        .name-container {
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        h1 {
-            font-size: 5em;
-            text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4;
-            margin: 0;
-        }
-        
-        .message {
-            font-size: 1.5em;
+
+        .container {
             text-align: center;
-            max-width: 600px;
-            line-height: 1.6;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s, transform 1s;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #0ff;
+            border-radius: 20px;
+            box-shadow: 0 0 30px #0ff,
+                       inset 0 0 30px #0ff;
+            position: relative;
+            animation: appear 2s ease-out;
+            transform-style: preserve-3d;
         }
-        
-        .btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            background: transparent;
-            border: 2px solid #fff;
+
+        @keyframes appear {
+            0% {
+                transform: rotateX(90deg) translateY(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: rotateX(0) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            color: transparent;
+            background: linear-gradient(45deg, #0ff, #ff00ff, #0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: hologram 3s infinite;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        @keyframes hologram {
+            0%, 100% {
+                filter: hue-rotate(0deg) brightness(1);
+                transform: translateZ(0);
+            }
+            50% {
+                filter: hue-rotate(180deg) brightness(1.5);
+                transform: translateZ(50px);
+            }
+        }
+
+        .message {
+            font-size: 1.5rem;
             color: #fff;
-            cursor: pointer;
-            transition: all 0.3s;
+            margin: 2rem 0;
             opacity: 0;
-            transform: scale(0.9);
+            animation: slideIn 1s forwards;
+            animation-delay: 2s;
         }
-        
-        .btn:hover {
-            background: #fff;
-            color: #000;
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
-        
-        .firework {
+
+        .cyber-circle {
             position: absolute;
-            width: 5px;
-            height: 5px;
+            border: 2px solid #0ff;
             border-radius: 50%;
-            animation: explode 1s ease-out forwards;
-        }
-        
-        @keyframes explode {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(30); opacity: 0; }
+            animation: rotate 10s linear infinite;
         }
 
-        .flower {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23ff69b4" d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>') no-repeat center center;
-            background-size: contain;
-            opacity: 0;
-            transition: opacity 0.5s;
+        .cyber-circle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            border-style: dashed;
         }
 
-        .interactive-area {
+        .cyber-circle:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            border-style: dotted;
+            animation-direction: reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
             position: absolute;
-            bottom: 20px;
-            display: flex;
-            justify-content: space-around;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background: black;
         }
 
-        .mood-button {
-            padding: 10px 20px;
-            font-size: 1em;
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s;
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00ff;
+            animation: glitch-1 2s infinite linear alternate-reverse;
         }
 
-        .mood-button:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .glitch::after {
+            left: -2px;
+            text-shadow: 2px 0 #0ff;
+            animation: glitch-2 2s infinite linear alternate-reverse;
         }
 
-        #playlist {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 5px;
+        @keyframes glitch-1 {
+            0% { clip-path: inset(20% 0 30% 0); }
+            20% { clip-path: inset(60% 0 10% 0); }
+            40% { clip-path: inset(40% 0 50% 0); }
+            60% { clip-path: inset(80% 0 5% 0); }
+            80% { clip-path: inset(10% 0 70% 0); }
+            100% { clip-path: inset(30% 0 20% 0); }
         }
 
-        #playlist select {
-            background: transparent;
-            color: #fff;
-            border: 1px solid #fff;
-            padding: 5px;
+        @keyframes glitch-2 {
+            0% { clip-path: inset(15% 0 35% 0); }
+            20% { clip-path: inset(55% 0 15% 0); }
+            40% { clip-path: inset(45% 0 45% 0); }
+            60% { clip-path: inset(75% 0 10% 0); }
+            80% { clip-path: inset(15% 0 65% 0); }
+            100% { clip-path: inset(25% 0 25% 0); }
         }
-        .watermark {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.3);
-            pointer-events: none;
-            z-index: 1000;
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <div class="name-container">
-            <h1 id="name">Patricia</h1>
+    <div id="stars" class="stars"></div>
+    <div class="container">
+        <div class="cyber-circle"></div>
+        <div class="cyber-circle"></div>
+        <h1 class="glitch pulse" data-text="TATIANA">TATIANA</h1>
+        <div class="message">
+            <p>✧ Una estrella única en el universo ✧</p>
+            <p>⟨ Brillante como ninguna otra ⟩</p>
+            <p>∞ Infinitamente especial ∞</p>
         </div>
-        <p class="message">Hay momentos que iluminan nuestras vidas como estrellas en el cielo nocturno.</p>
-        <button class="btn" id="mainButton">Descubre más</button>
     </div>
-
-    <div class="interactive-area">
-        <button class="mood-button" id="happyButton">Feliz</button>
-        <button class="mood-button" id="romanticButton">Romántico</button>
-        <button class="mood-button" id="dreamyButton">Soñador</button>
-    </div>
-    <div class="watermark">Develope: chovirri dev</div>
 
     <script>
-        const fonts = [
-            'Dancing Script', 'Pacifico', 'Lobster', 'Satisfy', 'Caveat', 
-            'Indie Flower', 'Amatic SC', 'Shadows Into Light', 'Permanent Marker', 'Courgette',
-            'Kaushan Script', 'Great Vibes', 'Sacramento', 'Tangerine', 'Allura',
-            'Pinyon Script', 'Mr Dafoe', 'Yellowtail', 'Petit Formal Script', 'Clicker Script'
-        ];
-
-        function changeFontRandomly() {
-            const nameElement = document.getElementById('name');
-            const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-            nameElement.style.fontFamily = randomFont;
-        }
-
+        // Crear estrellas
         function createStars() {
-            const starCount = 200;
-            for (let i = 0; i < starCount; i++) {
-                let star = document.createElement('div');
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
                 star.className = 'star';
-                star.style.top = `${Math.random() * 100}%`;
                 star.style.left = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 2}s`;
-                document.body.appendChild(star);
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.setProperty('--duration', `${Math.random() * 3 + 1}s`);
+                starsContainer.appendChild(star);
             }
         }
 
-        function showContent() {
-            document.querySelector('.content').style.opacity = 1;
-            setTimeout(() => {
-                document.querySelector('.message').style.opacity = 1;
-                document.querySelector('.message').style.transform = 'translateY(0)';
-            }, 1000);
-            setTimeout(() => {
-                document.querySelector('.btn').style.opacity = 1;
-                document.querySelector('.btn').style.transform = 'scale(1)';
-            }, 2000);
-        }
-
-        function createFirework(x, y) {
-            const colors = ['#ff0', '#f0f', '#0ff', '#f00', '#0f0'];
-            for (let i = 0; i < 30; i++) {
-                let firework = document.createElement('div');
-                firework.className = 'firework';
-                firework.style.left = `${x}px`;
-                firework.style.top = `${y}px`;
-                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                firework.style.transform = `rotate(${Math.random() * 360}deg)`;
-                document.body.appendChild(firework);
-                setTimeout(() => firework.remove(), 1000);
-            }
-        }
-
-        function createFlower(x, y) {
-            let flower = document.createElement('div');
-            flower.className = 'flower';
-            flower.style.left = `${x}px`;
-            flower.style.top = `${y}px`;
-            document.body.appendChild(flower);
-            setTimeout(() => {
-                flower.style.opacity = 1;
-            }, 50);
-            setTimeout(() => {
-                flower.style.opacity = 0;
-                setTimeout(() => flower.remove(), 500);
+        // Efecto de distorsión del texto
+        function glitchEffect() {
+            const title = document.querySelector('h1');
+            setInterval(() => {
+                title.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+                setTimeout(() => {
+                    title.style.transform = 'translate(0, 0)';
+                }, 50);
             }, 3000);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            createStars();
-            setTimeout(showContent, 500);
-            setInterval(changeFontRandomly, 1000);
-        });
-
-        document.getElementById('mainButton').addEventListener('click', (e) => {
-            createFirework(e.clientX, e.clientY);
-            document.querySelector('.message').textContent = "A veces, las palabras no son necesarias para expresar lo que el corazón siente.";
-        });
-
-        document.addEventListener('click', (e) => {
-            if (e.target.className !== 'btn' && e.target.className !== 'mood-button') {
-                createFlower(e.clientX, e.clientY);
-            }
-        });
-
-        document.getElementById('happyButton').addEventListener('click', () => {
-            document.body.style.background = 'linear-gradient(45deg, #FFD700, #FFA500)';
-            document.querySelector('.message').textContent = "Tu sonrisa ilumina el mundo entero.";
-        });
-
-        document.getElementById('romanticButton').addEventListener('click', () => {
-            document.body.style.background = 'linear-gradient(45deg, #FF69B4, #FF1493)';
-            document.querySelector('.message').textContent = "Cada momento contigo es como un sueño hecho realidad.";
-        });
-
-        document.getElementById('dreamyButton').addEventListener('click', () => {
-            document.body.style.background = 'linear-gradient(45deg, #4B0082, #8A2BE2)';
-            document.querySelector('.message').textContent = "Juntos podemos alcanzar las estrellas.";
-        });
-
-        document.getElementById('musicSelect').addEventListener('change', (e) => {
-            // Aquí se simularía la reproducción de música
-            alert(`Reproduciendo: ${e.target.options[e.target.selectedIndex].text}`);
-        });
+        createStars();
+        glitchEffect();
     </script>
 </body>
 </html>
