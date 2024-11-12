@@ -1,232 +1,289 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chovirri - Servicios Académicos Premium</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
-        body {
+        :root {
+            --primary: #8b31ff;
+            --secondary: #b975ff;
+            --accent: #4a1b8a;
+            --dark: #150729;
+            --light: #ffffff;
+            --gold: #ffd700;
+            --economic: #4CAF50;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold), 0 0 15px var(--gold); }
+            50% { box-shadow: 0 0 20px var(--gold), 0 0 25px var(--gold), 0 0 30px var(--gold); }
+            100% { box-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold), 0 0 15px var(--gold); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #000;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            perspective: 1000px;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle var(--duration) infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+        body {
+            background: var(--dark);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(139, 49, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(73, 27, 138, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(185, 117, 255, 0.1) 0%, transparent 70%);
+            color: var(--light);
+            line-height: 1.6;
         }
 
         .container {
-            text-align: center;
-            padding: 3rem;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #0ff;
-            border-radius: 20px;
-            box-shadow: 0 0 30px #0ff,
-                       inset 0 0 30px #0ff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            padding: 3rem 0;
             position: relative;
-            animation: appear 2s ease-out;
-            transform-style: preserve-3d;
+            overflow: hidden;
         }
 
-        @keyframes appear {
-            0% {
-                transform: rotateX(90deg) translateY(100px);
-                opacity: 0;
-            }
-            100% {
-                transform: rotateX(0) translateY(0);
-                opacity: 1;
-            }
-        }
-
-        h1 {
-            font-size: 4rem;
-            margin: 0;
-            padding: 0;
-            position: relative;
-            color: transparent;
-            background: linear-gradient(45deg, #0ff, #ff00ff, #0ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: hologram 3s infinite;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        @keyframes hologram {
-            0%, 100% {
-                filter: hue-rotate(0deg) brightness(1);
-                transform: translateZ(0);
-            }
-            50% {
-                filter: hue-rotate(180deg) brightness(1.5);
-                transform: translateZ(50px);
-            }
-        }
-
-        .message {
-            font-size: 1.5rem;
-            color: #fff;
-            margin: 2rem 0;
-            opacity: 0;
-            animation: slideIn 1s forwards;
-            animation-delay: 2s;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .cyber-circle {
-            position: absolute;
-            border: 2px solid #0ff;
-            border-radius: 50%;
-            animation: rotate 10s linear infinite;
-        }
-
-        .cyber-circle:nth-child(1) {
-            width: 200px;
-            height: 200px;
-            border-style: dashed;
-        }
-
-        .cyber-circle:nth-child(2) {
-            width: 300px;
-            height: 300px;
-            border-style: dotted;
-            animation-direction: reverse;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
+        header::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, rgba(185, 117, 255, 0.3) 0%, transparent 100%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff00ff;
-            animation: glitch-1 2s infinite linear alternate-reverse;
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
         }
 
-        .glitch::after {
-            left: -2px;
-            text-shadow: 2px 0 #0ff;
-            animation: glitch-2 2s infinite linear alternate-reverse;
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            background: linear-gradient(to right, var(--light), var(--gold));
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
 
-        @keyframes glitch-1 {
-            0% { clip-path: inset(20% 0 30% 0); }
-            20% { clip-path: inset(60% 0 10% 0); }
-            40% { clip-path: inset(40% 0 50% 0); }
-            60% { clip-path: inset(80% 0 5% 0); }
-            80% { clip-path: inset(10% 0 70% 0); }
-            100% { clip-path: inset(30% 0 20% 0); }
+        .hero p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            color: #e0cfff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        @keyframes glitch-2 {
-            0% { clip-path: inset(15% 0 35% 0); }
-            20% { clip-path: inset(55% 0 15% 0); }
-            40% { clip-path: inset(45% 0 45% 0); }
-            60% { clip-path: inset(75% 0 10% 0); }
-            80% { clip-path: inset(15% 0 65% 0); }
-            100% { clip-path: inset(25% 0 25% 0); }
+        /* Servicios */
+        .services {
+            padding: 4rem 0;
         }
 
-        .pulse {
-            animation: pulse 2s infinite;
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            padding: 2rem 0;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .service-card {
+            background: rgba(139, 49, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(185, 117, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 49, 255, 0.2) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(139, 49, 255, 0.3);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .service-card p {
+            margin-bottom: 2rem;
+            color: #e0cfff;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .price-btn {
+            display: inline-block;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .price-economic {
+            background: var(--economic);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .price-economic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .price-premium {
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            animation: glow 2s infinite;
+        }
+
+        .price-premium:hover {
+            transform: scale(1.05);
+        }
+
+        .service-description {
+            font-size: 1.2rem;
+            color: #e0cfff;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="stars" class="stars"></div>
-    <div class="container">
-        <div class="cyber-circle"></div>
-        <div class="cyber-circle"></div>
-        <h1 class="glitch pulse" data-text="TATIANA">TATIANA</h1>
-        <div class="message">
-            <p>✧ Una estrella única en el universo ✧</p>
-            <p>⟨ Brillante como ninguna otra ⟩</p>
-            <p>∞ Infinitamente especial ∞</p>
+    <header>
+        <div class="container">
+            <div class="hero" data-aos="fade-down">
+                <h1>PROYECT SELLER BOSS</h1>
+                <p>Servicios Académicos de Excelencia</p>
+                <p>devp chovirri</p>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <section class="services">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up">
+                    <h3>Presentaciones Power Point</h3>
+                    <p class="service-description">Creamos presentaciones profesionales, dinámicas y visualmente impactantes. Adaptamos cada detalle según tus necesidades, garantizando un trabajo único y personalizado que destacará en tu exposición.</p>
+                    <div class="price-container">
+                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20económico" class="price-btn price-economic">
+                            Básico: 30 Bs
+                        </a>
+                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20premium" class="price-btn price-premium">
+                            Premium: 40 Bs - Diseño Exclusivo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Proyectos Digitales</h3>
+                    <p class="service-description">Desarrollamos proyectos completos de agroecología y textiles, personalizados según tus requerimientos. Cada proyecto incluye investigación detallada y documentación profesional.</p>
+                    <div class="price-container">
+                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20básico" class="price-btn price-economic">
+                            Básico: 150 - 300 Bs
+                        </a>
+                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20premium" class="price-btn price-premium">
+                            Premium: 600 Bs - Control Total
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Informes Profesionales</h3>
+                    <p class="service-description">Elaboramos informes detallados y estructurados sobre cualquier temática. Garantizamos calidad, precisión y profesionalismo en cada documento.</p>
+                    <div class="price-container">
+                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20básico" class="price-btn price-economic">
+                            Básico: 15 Bs (2 hojas)
+                        </a>
+                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20premium" class="price-btn price-premium">
+                            Premium: 30 Bs - Sin límite de hojas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        // Crear estrellas
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 200; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.width = `${Math.random() * 3}px`;
-                star.style.height = star.style.width;
-                star.style.setProperty('--duration', `${Math.random() * 3 + 1}s`);
-                starsContainer.appendChild(star);
-            }
-        }
-
-        // Efecto de distorsión del texto
-        function glitchEffect() {
-            const title = document.querySelector('h1');
-            setInterval(() => {
-                title.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
-                setTimeout(() => {
-                    title.style.transform = 'translate(0, 0)';
-                }, 50);
-            }, 3000);
-        }
-
-        createStars();
-        glitchEffect();
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
     </script>
 </body>
 </html>
