@@ -220,6 +220,44 @@
             .service-card {
                 padding: 2rem;
             }
+            
+        }
+        .price-negotiate {
+            background: linear-gradient(45deg, #9c27b0, #673ab7);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+            animation: pulseViolet 2s infinite;
+        }
+
+        @keyframes pulseViolet {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); 
+                  box-shadow: 0 0 20px rgba(156, 39, 176, 0.6); }
+            100% { transform: scale(1); }
+        }
+
+        .price-negotiate:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.5);
+        }
+
+        .special-card {
+            background: rgba(156, 39, 176, 0.08);
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+
+        .special-card h3 {
+            background: linear-gradient(to right, #9c27b0, #673ab7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
@@ -241,10 +279,10 @@
                     <h3>Presentaciones Power Point</h3>
                     <p class="service-description">Creamos presentaciones profesionales, dinámicas y visualmente impactantes. Adaptamos cada detalle según tus necesidades, garantizando un trabajo único y personalizado que destacará en tu exposición.</p>
                     <div class="price-container">
-                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20económico" class="price-btn price-economic">
+                        <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20económico" class="price-btn price-economic">
                             Básico: 30 Bs
                         </a>
-                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20premium" class="price-btn price-premium">
+                        <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20premium" class="price-btn price-premium">
                             Premium: 40 Bs - Diseño Exclusivo
                         </a>
                     </div>
@@ -254,10 +292,10 @@
                     <h3>Proyectos Digitales</h3>
                     <p class="service-description">Desarrollamos proyectos completos de agroecología y textiles, personalizados según tus requerimientos. Cada proyecto incluye investigación detallada y documentación profesional.</p>
                     <div class="price-container">
-                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20básico" class="price-btn price-economic">
+                        <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20básico" class="price-btn price-economic">
                             Básico: 150 - 300 Bs
                         </a>
-                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20premium" class="price-btn price-premium">
+                        <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20premium" class="price-btn price-premium">
                             Premium: 600 Bs - Control Total
                         </a>
                     </div>
@@ -267,19 +305,36 @@
                     <h3>Informes Profesionales</h3>
                     <p class="service-description">Elaboramos informes detallados y estructurados sobre cualquier temática. Garantizamos calidad, precisión y profesionalismo en cada documento.</p>
                     <div class="price-container">
-                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20básico" class="price-btn price-economic">
+                        <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20básico" class="price-btn price-economic">
                             Básico: 15 Bs (2 hojas)
                         </a>
-                        <a href="https://wa.me/5917229259?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20premium" class="price-btn price-premium">
+                        <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20premium" class="price-btn price-premium">
                             Premium: 30 Bs - Sin límite de hojas
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="service-card special-card" data-aos="fade-up" data-aos-delay="300">
+            <h3>Otros Tipos de Trabajo</h3>
+            <p class="service-description">¿Tienes un proyecto especial en mente? ¿Necesitas un servicio personalizado que no está en la lista? Estamos abiertos a discutir cualquier tipo de trabajo académico o digital que necesites. Cada proyecto es único y el precio se ajustará según tus requerimientos específicos.</p>
+            <div class="price-container">
+                <p style="color: #e0cfff; font-size: 1.2rem; margin-bottom: 1rem;">Precio Negociable según Proyecto</p>
+                <a href="https://wa.me/59172292579?text=Hola,%20me%20gustaría%20negociar%20un%20trabajo%20especial" class="price-negotiate">
+                    Empieza a Negociar
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
     </section>
 
     <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
         AOS.init({
             duration: 1000,
             once: true
