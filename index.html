@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chovirri - Servicios Académicos Premium</title>
+    <title>Project Seller Boss - Servicios Académicos Premium</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
@@ -17,6 +17,7 @@
             --economic: #4CAF50;
         }
 
+        /* Animaciones mejoradas */
         @keyframes glow {
             0% { box-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold), 0 0 15px var(--gold); }
             50% { box-shadow: 0 0 20px var(--gold), 0 0 25px var(--gold), 0 0 30px var(--gold); }
@@ -52,10 +53,10 @@
             padding: 0 20px;
         }
 
-        /* Header */
+        /* Header Mejorado */
         header {
             background: linear-gradient(45deg, var(--accent), var(--primary));
-            padding: 3rem 0;
+            padding: 4rem 0;
             position: relative;
             overflow: hidden;
         }
@@ -75,44 +76,45 @@
 
         .hero {
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
             position: relative;
             animation: float 6s ease-in-out infinite;
         }
 
         .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
             background: linear-gradient(to right, var(--light), var(--gold));
-            -webkit-background-clip: text; 
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
         }
 
         .hero p {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             opacity: 0.9;
             color: #e0cfff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
         }
 
-        /* Servicios */
+        /* Tarjetas de Servicio Mejoradas */
         .services {
-            padding: 4rem 0;
+            padding: 5rem 0;
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            gap: 3rem;
             padding: 2rem 0;
         }
 
         .service-card {
             background: rgba(139, 49, 255, 0.08);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 3rem;
             transition: all 0.4s ease;
             border: 1px solid rgba(185, 117, 255, 0.2);
             backdrop-filter: blur(10px);
@@ -137,37 +139,33 @@
             box-shadow: 0 15px 30px rgba(139, 49, 255, 0.3);
         }
 
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
         .service-card h3 {
             color: var(--secondary);
             margin-bottom: 1.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
             position: relative;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        .service-card p {
-            margin-bottom: 2rem;
+        .service-description {
+            font-size: 1.3rem;
             color: #e0cfff;
-            position: relative;
-            font-size: 1.1rem;
+            margin-bottom: 2rem;
             line-height: 1.8;
         }
 
+        /* Botones de Precio Mejorados */
         .price-container {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .price-btn {
             display: inline-block;
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
@@ -175,6 +173,7 @@
             position: relative;
             z-index: 1;
             text-align: center;
+            font-size: 1.1rem;
         }
 
         .price-economic {
@@ -182,58 +181,13 @@
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
         }
 
-        .price-economic:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-        }
-
         .price-premium {
             background: linear-gradient(45deg, #ffd700, #ffa500);
             animation: glow 2s infinite;
         }
 
-        .price-premium:hover {
-            transform: scale(1.05);
-        }
-
-        .service-description {
-            font-size: 1.2rem;
-            color: #e0cfff;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .highlight {
-            color: var(--gold);
-            font-weight: bold;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .service-card {
-                padding: 2rem;
-            }
-            
-        }
         .price-negotiate {
             background: linear-gradient(45deg, #9c27b0, #673ab7);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
             animation: pulseViolet 2s infinite;
         }
 
@@ -244,20 +198,45 @@
             100% { transform: scale(1); }
         }
 
-        .price-negotiate:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(156, 39, 176, 0.5);
+        /* Footer Nuevo */
+        footer {
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
         }
 
-        .special-card {
-            background: rgba(156, 39, 176, 0.08);
-            border: 1px solid rgba(156, 39, 176, 0.3);
+        footer p {
+            color: var(--light);
+            font-size: 1.1rem;
         }
 
-        .special-card h3 {
-            background: linear-gradient(to right, #9c27b0, #673ab7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Responsive Mejorado */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+            
+            .service-card h3 {
+                font-size: 1.8rem;
+            }
+
+            .service-description {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -265,9 +244,9 @@
     <header>
         <div class="container">
             <div class="hero" data-aos="fade-down">
-                <h1>PROYECT SELLER BOSS</h1>
+                <h1>PROJECT SELLER BOSS</h1>
                 <p>Servicios Académicos de Excelencia</p>
-                <p>devp chovirri</p>
+                <p>Desarrollado por Chovirri</p>
             </div>
         </div>
     </header>
@@ -277,7 +256,7 @@
             <div class="services-grid">
                 <div class="service-card" data-aos="fade-up">
                     <h3>Presentaciones Power Point</h3>
-                    <p class="service-description">Creamos presentaciones profesionales, dinámicas y visualmente impactantes. Adaptamos cada detalle según tus necesidades, garantizando un trabajo único y personalizado que destacará en tu exposición.</p>
+                    <p class="service-description">Diseñamos presentaciones profesionales y dinámicas que capturan la atención. Cada diapositiva está cuidadosamente elaborada para maximizar el impacto de tu mensaje.</p>
                     <div class="price-container">
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20económico" class="price-btn price-economic">
                             Básico: 30 Bs
@@ -290,7 +269,7 @@
 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                     <h3>Proyectos Digitales</h3>
-                    <p class="service-description">Desarrollamos proyectos completos de agroecología y textiles, personalizados según tus requerimientos. Cada proyecto incluye investigación detallada y documentación profesional.</p>
+                    <p class="service-description">Especialistas en proyectos de agroecología y textiles. Investigación exhaustiva, documentación detallada y resultados profesionales garantizados.</p>
                     <div class="price-container">
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20básico" class="price-btn price-economic">
                             Básico: 150 - 300 Bs
@@ -303,7 +282,7 @@
 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <h3>Informes Profesionales</h3>
-                    <p class="service-description">Elaboramos informes detallados y estructurados sobre cualquier temática. Garantizamos calidad, precisión y profesionalismo en cada documento.</p>
+                    <p class="service-description">Redactamos informes concisos y bien estructurados que cumplen con los más altos estándares académicos y profesionales.</p>
                     <div class="price-container">
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20básico" class="price-btn price-economic">
                             Básico: 15 Bs (2 hojas)
@@ -314,30 +293,31 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="service-card special-card" data-aos="fade-up" data-aos-delay="300">
-            <h3>Otros Tipos de Trabajo</h3>
-            <p class="service-description">¿Tienes un proyecto especial en mente? ¿Necesitas un servicio personalizado que no está en la lista? Estamos abiertos a discutir cualquier tipo de trabajo académico o digital que necesites. Cada proyecto es único y el precio se ajustará según tus requerimientos específicos.</p>
-            <div class="price-container">
-                <p style="color: #e0cfff; font-size: 1.2rem; margin-bottom: 1rem;">Precio Negociable según Proyecto</p>
-                <a href="https://wa.me/59172292579?text=Hola,%20me%20gustaría%20negociar%20un%20trabajo%20especial" class="price-negotiate">
-                    Empieza a Negociar
-                </a>
+
+            <div class="service-card special-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Proyectos Especiales</h3>
+                <p class="service-description">¿Necesitas un servicio personalizado? Adaptamos nuestras soluciones a tus necesidades específicas. Cada proyecto es único y merece una atención especial.</p>
+                <div class="price-container">
+                    <p style="color: #e0cfff; font-size: 1.2rem; margin-bottom: 1rem;">Precio Negociable según Proyecto</p>
+                    <a href="https://wa.me/59172292579?text=Hola,%20me%20gustaría%20negociar%20un%20trabajo%20especial" class="price-negotiate price-btn">
+                        Consulta tu Proyecto
+                    </a>
+                </div>
             </div>
         </div>
-
-    </div>
-</div>
     </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 Project Seller Boss. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <script>
         AOS.init({
             duration: 1000,
-            once: true
-        });
-        AOS.init({
-            duration: 1000,
-            once: true
+            once: true,
+            offset: 100
         });
     </script>
 </body>
