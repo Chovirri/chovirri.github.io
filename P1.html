@@ -3,258 +3,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle del Producto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Zona Restringida - Project Seller Boss</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
+        :root {
+            --dark: #1a1a1a;
+            --red: #ff0000;
+            --light: #ffffff;
+            --gold: #ffd700;
+            --orange: #ff8c00;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f0f4f8; /* Fondo suave */
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        header {
-            background-color: #0056b3; /* Azul oscuro */
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .message {
-            text-align: center;
-            font-size: 2rem;
-            color: #28a745;
-            margin: 40px 0;
-            animation: fadeIn 2s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .container {
+        body {
+            background: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 20px auto;
-        }
-
-        .product-detail {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-        }
-
-        .product-info {
-            display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-
-        #product-image {
-            width: 150px;
-            height: auto;
-            border-radius: 8px;
-            margin-right: 20px;
-        }
-
-        #qr-image {
-            width: 180px;
-            height: auto;
-            margin-top: 10px;
-            cursor: pointer;
-            transition: width 0.3s;
-        }
-
-        .product-details h3 {
-            margin: 0;
-        }
-
-        .product-details p {
-            font-size: 1.5rem;
-            color: #333;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #218838;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #0056b3;
-            color: white;
-            margin-top: 20px;
-        }
-
-        .department-table {
-            border-collapse: collapse;
-            margin-left: 20px;
-            width: 100%;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
             overflow: hidden;
+            background-image: 
+                url('https://wallpapercave.com/wp/wp6363452.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        .department-table th, .department-table td {
-            border: 1px solid #007bff;
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .login-container, .profile-container {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--gold);
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+        }
+
+        .login-container {
+            max-width: 400px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
             padding: 12px;
-            text-align: left;
-            transition: background-color 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .department-table th {
-            background-color: #e9ecef;
-            color: #0056b3;
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--orange);
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
         }
 
-        .department-table tr:hover {
-            background-color: #d1ecf1;
+        .form-group label {
+            position: absolute;
+            left: 12px;
+            top: -10px;
+            background: var(--dark);
+            padding: 0 5px;
+            color: var(--gold);
+            font-size: 0.9rem;
         }
 
-        .selected {
-            background-color: #c3e6cb;
+        .login-btn {
+            background: linear-gradient(45deg, var(--red), var(--orange));
+            color: var(--light);
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header h1 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .profile-header p {
+            color: var(--orange);
+            font-size: 1.2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 140, 0, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--gold);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--light);
+            font-size: 1.5rem;
             font-weight: bold;
         }
 
-        .title {
-            margin: 20px 0;
+        .achievements {
+            margin: 2rem 0;
+        }
+
+        .achievements h2 {
+            color: var(--gold);
+            margin-bottom: 1rem;
             text-align: center;
-            font-size: 1.2rem;
-            color: #0056b3;
+        }
+
+        .achievement-list {
+            list-style: none;
+        }
+
+        .achievement-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: rgba(255, 140, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .achievement-list li i {
+            color: var(--gold);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--red);
+            color: var(--light);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .error-message {
+            color: var(--red);
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-message {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            margin: 0 auto 2rem;
+            display: block;
+            object-fit: cover;
         }
     </style>
 </head>
-<body onload="cargarProducto()">
-    <header>
-        <h1>Tua Ta UYPI</h1>
-    </header>
+<body>
+    <div id="loginSection" class="login-container">
+        <div class="login-form">
+            <div class="form-group">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button class="login-btn" onclick="validateLogin()">Iniciar Sesión</button>
+            <p id="errorMsg" class="error-message">Usuario o contraseña incorrectos</p>
+        </div>
+    </div>
 
-    <div class="message">¡Gracias por preferir nuestro producto!</div>
+    <div id="profileSection" class="profile-container" style="display: none;">
+        <div class="welcome-message">
+            Bienvenido: <span id="userDisplay"></span>
+        </div>
+        
+        <div class="profile-header">
+            <img src="https://img.freepik.com/premium-vector/gaming-logo-avatar_179419-144.jpg" alt="Perfil" class="profile-image">
+            <h1>Jhojan "TheFireKing" </h1>
+            <p>Profesional de Free Fire | Campeón Regional</p>
+        </div>
 
-    <main>
-        <div class="container">
-            <section id="product-detail" class="product-detail">
-                <h2>Detalle del Producto</h2>
-                <div class="product-info">
-                    <img id="product-image" src="https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/13.jpeg?raw=true" alt="Imagen del producto">
-                    <div class="product-details">
-                        <h3 id="product-name">Nombre del Producto</h3>
-                        <p id="product-price">$0.00</p>
-                        <img id="qr-image" src="https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/qr.jpeg?raw=true" alt="QR para pagar" onclick="enlargeQR()">
-                        <a href="https://wa.me/1234567890" target="_blank" class="btn">Enviar Comprobante de Pago</a>
-                    </div>
-                </div>
-            </section>
-
-            <div>
-                <div class="title">¿Dónde se encuentra?</div>
-                <table class="department-table">
-                    <thead>
-                        <tr>
-                            <th>Departamento</th>
-                            <th>Costo de Envío</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr onclick="updatePrice(10, this)">
-                            <td>La Paz</td>
-                            <td>$10.00</td>
-                        </tr>
-                        <tr onclick="updatePrice(12, this)">
-                            <td>Santa Cruz</td>
-                            <td>$12.00</td>
-                        </tr>
-                        <tr onclick="updatePrice(15, this)">
-                            <td>Sucre</td>
-                            <td>$15.00</td>
-                        </tr>
-                        <tr onclick="updatePrice(8, this)">
-                            <td>Cochabamba</td>
-                            <td>$8.00</td>
-                        </tr>
-                        <tr onclick="updatePrice(14, this)">
-                            <td>Tarija</td>
-                            <td>$14.00</td>
-                        </tr>
-                        <tr onclick="updatePrice(9, this)">
-                            <td>Oruro</td>
-                            <td>$9.00</td>
-                        </tr>
-                        <tr onclick="updatePrice(11, this)">
-                            <td>Potosí</td>
-                            <td>$11.00</td>
-                        </tr>
-                        <tr onclick="updatePrice(7, this)">
-                            <td>Beni</td>
-                            <td>$7.00</td>
-                        </tr>
-                        <tr onclick="updatePrice(6, this)">
-                            <td>Pando</td>
-                            <td>$6.00</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Victorias Totales</h3>
+                <p>1,500+</p>
+            </div>
+            <div class="stat-card">
+                <h3>K/D Ratio</h3>
+                <p>4.8</p>
+            </div>
+            <div class="stat-card">
+                <h3>Torneos Ganados</h3>
+                <p>12</p>
             </div>
         </div>
-    </main>
 
-    <footer>
-        <p>&copy; 2024 Tua Ta UYPI</p>
-    </footer>
+        <div class="achievements">
+            <h2>Logros Destacados</h2>
+            <ul class="achievement-list">
+                <li>
+                    <i class="fas fa-trophy"></i>
+                    Campeón Nacional Free Fire 2023
+                </li>
+                <li>
+                    <i class="fas fa-medal"></i>
+                    MVP en Liga Profesional - Temporada 8
+                </li>
+                <li>
+                    <i class="fas fa-star"></i>
+                    Record de 25 eliminaciones en una partida competitiva
+                </li>
+                <li>
+                    <i class="fas fa-crown"></i>
+                    Líder del clan "Elite Warriors" - Top 1 Regional
+                </li>
+            </ul>
+        </div>
+
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Volver al Inicio
+        </a>
+    </div>
 
     <script>
-        function enlargeQR() {
-            const qrImage = document.getElementById('qr-image');
-            qrImage.style.width = qrImage.style.width === '180px' ? '216px' : '180px';
-        }
+        const users = {
+            'BOSS': 'talipa1234',
+            'Jhojan': 'zone38239'
+        };
 
-        function updatePrice(shippingCost, row) {
-            const productPriceElement = document.getElementById('product-price');
-            const basePrice = parseFloat(new URLSearchParams(window.location.search).get('precio')) || 50; // Precio base del producto desde URL o por defecto
-            const totalPrice = basePrice + shippingCost;
-            productPriceElement.innerText = `$${totalPrice.toFixed(2)}`;
-
-            // Resaltar fila seleccionada
-            const rows = document.querySelectorAll('.department-table tr');
-            rows.forEach(r => r.classList.remove('selected')); // Quitar selección de filas
-            row.classList.add('selected'); // Agregar clase de selección
-        }
-
-        function cargarProducto() {
-            const params = new URLSearchParams(window.location.search);
-            const producto = params.get('producto');
-            const precio = params.get('precio');
-            const productoImagen = {
-                'Miel de señorita': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/13.jpeg?raw=true',
-                'Propoleo de melipona': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/20.jpeg?raw=true',
-                'Miel de Eucalipto': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/3.jpeg?raw=true',
-                'Jalea Real': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/4.jpeg?raw=true',
-                'Polen de Abeja': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/5.jpeg?raw=true',
-                'Miel Multifloral': 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/6.jpeg?raw=true',
-            };
-
-            if (producto && precio) {
-                document.getElementById('product-name').innerText = producto;
-                document.getElementById('product-price').innerText = `$${parseFloat(precio).toFixed(2)}`;
-                document.getElementById('product-image').src = productoImagen[producto] || 'https://github.com/Chovirri/chovirri.github.io/blob/main/upluad/default.jpeg?raw=true';
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            if (users[username] && users[username] === password) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('profileSection').style.display = 'block';
+                document.getElementById('userDisplay').textContent = username;
+                errorMsg.style.display = 'none';
+            } else {
+                errorMsg.style.display = 'block';
+                errorMsg.style.animation = 'fadeIn 0.5s ease';
             }
         }
+
+        // Permitir login con Enter
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                validateLogin();
+            }
+        });
     </script>
 </body>
 </html>
