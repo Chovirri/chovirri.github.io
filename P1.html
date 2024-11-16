@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zona Restringida - Project Seller Boss Gaming Profile">
+    <meta name="theme-color" content="#1a1a1a">
     <title>Zona Restringida - Project Seller Boss</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -32,8 +34,7 @@
             padding: 20px;
             position: relative;
             overflow: hidden;
-            background-image: 
-                url('https://wallpapercave.com/wp/wp6363452.jpg');
+            background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -46,8 +47,40 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
 
         .login-container, .profile-container {
@@ -60,6 +93,7 @@
             position: relative;
             z-index: 2;
             box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+            animation: fadeIn 0.5s ease;
         }
 
         .login-container {
@@ -149,10 +183,15 @@
 
         .stat-card {
             background: rgba(255, 140, 0, 0.1);
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 10px;
             border: 1px solid var(--gold);
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
         }
 
         .stat-card h3 {
@@ -174,42 +213,57 @@
             color: var(--gold);
             margin-bottom: 1rem;
             text-align: center;
+            font-size: 1.8rem;
         }
 
         .achievement-list {
             list-style: none;
+            display: grid;
+            gap: 1rem;
         }
 
         .achievement-list li {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 0.5rem;
+            padding: 1rem;
             background: rgba(255, 140, 0, 0.1);
-            border-radius: 5px;
+            border-radius: 10px;
+            border: 1px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-list li:hover {
+            transform: translateX(10px);
+            background: rgba(255, 140, 0, 0.2);
         }
 
         .achievement-list li i {
             color: var(--gold);
+            font-size: 1.5rem;
+            min-width: 30px;
+            text-align: center;
         }
 
-        .back-button {
+        .logout-btn {
+            background: linear-gradient(45deg, var(--red), var(--orange));
+            color: var(--light);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2rem;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--red);
-            color: var(--light);
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
         }
 
-        .back-button:hover {
-            transform: translateY(-3px);
+        .logout-btn:hover {
+            transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
         }
 
@@ -218,6 +272,7 @@
             text-align: center;
             margin-top: 1rem;
             display: none;
+            font-weight: bold;
         }
 
         @keyframes fadeIn {
@@ -241,48 +296,103 @@
             margin: 0 auto 2rem;
             display: block;
             object-fit: cover;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .login-container, .profile-container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .profile-header h1 {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .achievement-list li {
+                padding: 0.8rem;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .form-group input {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .profile-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .achievement-list li i {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
     <div id="loginSection" class="login-container">
         <div class="login-form">
             <div class="form-group">
                 <label for="username">Usuario:</label>
-                <input type="text" id="username" required>
+                <input type="text" id="username" required autocomplete="username">
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" required>
+                <input type="password" id="password" required autocomplete="current-password">
             </div>
-            <button class="login-btn" onclick="validateLogin()">Iniciar Sesión</button>
+            <button class="login-btn" onclick="validateLogin()">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </button>
             <p id="errorMsg" class="error-message">Usuario o contraseña incorrectos</p>
         </div>
     </div>
 
     <div id="profileSection" class="profile-container" style="display: none;">
         <div class="welcome-message">
-            Bienvenido: <span id="userDisplay"></span>
+            ¡Bienvenido, <span id="userDisplay"></span>!
         </div>
         
         <div class="profile-header">
-            <img src="https://img.freepik.com/premium-vector/gaming-logo-avatar_179419-144.jpg" alt="Perfil" class="profile-image">
-            <h1>Jhojan "TheFireKing" </h1>
+            <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=300&h=300&q=80" alt="Perfil" class="profile-image">
+            <h1>Jhojan "TheFireKing"</h1>
             <p>Profesional de Free Fire | Campeón Regional</p>
         </div>
 
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Victorias Totales</h3>
-                <p>1,500+</p>
+                <p class="counter" data-target="1500">0</p>
             </div>
             <div class="stat-card">
                 <h3>K/D Ratio</h3>
-                <p>4.8</p>
+                <p class="counter" data-target="4.8">0</p>
             </div>
             <div class="stat-card">
                 <h3>Torneos Ganados</h3>
-                <p>12</p>
+                <p class="counter" data-target="12">0</p>
             </div>
         </div>
 
@@ -291,27 +401,38 @@
             <ul class="achievement-list">
                 <li>
                     <i class="fas fa-trophy"></i>
-                    Campeón Nacional Free Fire 2023
+                    <div>
+                        <h3>Campeón Nacional Free Fire 2023</h3>
+                        <p>Primer lugar en el torneo nacional</p>
+                    </div>
                 </li>
                 <li>
                     <i class="fas fa-medal"></i>
-                    MVP en Liga Profesional - Temporada 8
+                    <div>
+                        <h3>MVP en Liga Profesional</h3>
+                        <p>Temporada 8 - Mejor jugador del torneo</p>
+                    </div>
                 </li>
                 <li>
                     <i class="fas fa-star"></i>
-                    Record de 25 eliminaciones en una partida competitiva
+                    <div>
+                        <h3>Récord de Eliminaciones</h3>
+                        <p>25 eliminaciones en una partida competitiva</p>
+                    </div>
                 </li>
                 <li>
                     <i class="fas fa-crown"></i>
-                    Líder del clan "Elite Warriors" - Top 1 Regional
+                    <div>
+                        <h3>Líder Elite Warriors</h3>
+                        <p>Clan Top 1 Regional - 50,000+ puntos</p>
+                    </div>
                 </li>
             </ul>
         </div>
 
-        <a href="index.html" class="back-button">
-            <i class="fas fa-arrow-left"></i>
-            Volver al Inicio
-        </a>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </button>
     </div>
 
     <script>
@@ -320,28 +441,98 @@
             'Jhojan': 'zone38239'
         };
 
-        function validateLogin() {
+        function showLoading() {
+            document.querySelector('.loading-overlay').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.querySelector('.loading-overlay').style.display = 'none';
+        }
+
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const increment = target / speed;
+                let current = 0;
+
+                const updateCount = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = current.toFixed(1);
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCount();
+            });
+        }
+
+        async function validateLogin() {
+            showLoading();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('errorMsg');
             
-            if (users[username] && users[username] === password) {
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('profileSection').style.display = 'block';
-                document.getElementById('userDisplay').textContent = username;
-                errorMsg.style.display = 'none';
-            } else {
+            try {
+                if (users[username] && users[username] === password) {
+                    errorMsg.style.display = 'none';
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('profileSection').style.display = 'block';
+                    document.getElementById('userDisplay').textContent = username;
+                    
+                    animateCounters();
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', username);
+                } else {
+                    errorMsg.style.display = 'block';
+                    errorMsg.style.animation = 'shake 0.5s ease';
+                }
+            } catch (error) {
+                console.error('Error durante el inicio de sesión:', error);
+                errorMsg.textContent = 'Error en el inicio de sesión';
                 errorMsg.style.display = 'block';
-                errorMsg.style.animation = 'fadeIn 0.5s ease';
+            } finally {
+                hideLoading();
             }
         }
 
-        // Permitir login con Enter
+        function checkLoginSession() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const username = localStorage.getItem('username');
+            
+            if (isLoggedIn === 'true' && username) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('profileSection').style.display = 'block';
+                document.getElementById('userDisplay').textContent = username;
+                animateCounters();
+            }
+        }
+
+        function logout() {
+            showLoading();
+            setTimeout(() => {
+                document.getElementById('profileSection').style.display = 'none';
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                hideLoading();
+            }, 500);
+        }
+
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 validateLogin();
             }
         });
+
+        document.addEventListener('DOMContentLoaded', checkLoginSession);
     </script>
 </body>
 </html>
