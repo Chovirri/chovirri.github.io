@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Seller Boss - Servicios Académicos Premium</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <link rel="icon" type="image/png" href="perfil.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        
         :root {
             --primary: #8b31ff;
             --secondary: #b975ff;
@@ -19,7 +18,6 @@
             --economic: #4CAF50;
         }
 
-        /* Animaciones mejoradas */
         @keyframes glow {
             0% { box-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold), 0 0 15px var(--gold); }
             50% { box-shadow: 0 0 20px var(--gold), 0 0 25px var(--gold), 0 0 30px var(--gold); }
@@ -30,6 +28,11 @@
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
+        }
+
+        @keyframes shine {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
         * {
@@ -55,12 +58,12 @@
             padding: 0 20px;
         }
 
-        /* Header Mejorado */
         header {
             background: linear-gradient(45deg, var(--accent), var(--primary));
             padding: 4rem 0;
             position: relative;
             overflow: hidden;
+            border-bottom: 3px solid var(--gold);
         }
 
         header::before {
@@ -87,13 +90,12 @@
             font-size: 4.5rem;
             margin-bottom: 1.5rem;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            background: linear-gradient(to right, var(--light), var(--gold));
+            background: linear-gradient(to right, var(--light), var(--gold), var(--light));
+            background-size: 200% auto;
             -webkit-background-clip: text;
-            -moz-background-clip: text;
             background-clip: text;
-
-            
             -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
             letter-spacing: 2px;
         }
 
@@ -105,7 +107,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Tarjetas de Servicio Mejoradas */
         .services {
             padding: 5rem 0;
         }
@@ -133,11 +134,15 @@
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(139, 49, 255, 0.2) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(139, 49, 255, 0.1) 0%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            transform: translateX(0);
         }
 
         .service-card:hover {
@@ -151,6 +156,15 @@
             font-size: 2rem;
             position: relative;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .service-card h3::before {
+            content: '★';
+            color: var(--gold);
+            font-size: 1.5rem;
         }
 
         .service-description {
@@ -158,9 +172,11 @@
             color: #e0cfff;
             margin-bottom: 2rem;
             line-height: 1.8;
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--secondary);
         }
 
-        /* Botones de Precio Mejorados */
         .price-container {
             display: flex;
             flex-direction: column;
@@ -169,7 +185,9 @@
         }
 
         .price-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             color: white;
             padding: 1.2rem 2.5rem;
             border-radius: 30px;
@@ -180,6 +198,11 @@
             z-index: 1;
             text-align: center;
             font-size: 1.1rem;
+            gap: 0.5rem;
+        }
+
+        .price-btn i {
+            font-size: 1.2rem;
         }
 
         .price-economic {
@@ -187,9 +210,19 @@
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
         }
 
+        .price-economic:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
         .price-premium {
             background: linear-gradient(45deg, #ffd700, #ffa500);
             animation: glow 2s infinite;
+        }
+
+        .price-premium:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
         }
 
         .price-negotiate {
@@ -197,27 +230,45 @@
             animation: pulseViolet 2s infinite;
         }
 
-        @keyframes pulseViolet {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); 
-                  box-shadow: 0 0 20px rgba(156, 39, 176, 0.6); }
-            100% { transform: scale(1); }
+        .special-card {
+            background: linear-gradient(135deg, rgba(139, 49, 255, 0.15), rgba(73, 27, 138, 0.15));
+            border: 2px solid var(--gold);
         }
 
-        /* Footer Nuevo */
         footer {
             background: linear-gradient(45deg, var(--accent), var(--primary));
-            padding: 2rem 0;
+            padding: 3rem 0;
             margin-top: 4rem;
             text-align: center;
+            position: relative;
+            border-top: 3px solid var(--gold);
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
 
         footer p {
             color: var(--light);
             font-size: 1.1rem;
+            position: relative;
+            display: inline-block;
         }
 
-        /* Responsive Mejorado */
+        footer p::after {
+            content: '★';
+            color: var(--gold);
+            margin-left: 0.5rem;
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 3rem;
@@ -244,9 +295,41 @@
                 font-size: 1.1rem;
             }
         }
+
+        /* Nuevas animaciones y efectos */
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-particle 15s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="floating-particles" id="particles"></div>
+    
     <header>
         <div class="container">
             <div class="hero" data-aos="fade-down">
@@ -261,52 +344,54 @@
         <div class="container">
             <div class="services-grid">
                 <div class="service-card" data-aos="fade-up">
-                    <h3>Presentaciones Power Point</h3>
+                    <h3><i class="fas fa-file-powerpoint"></i>Presentaciones Power Point</h3>
                     <p class="service-description">Diseñamos presentaciones profesionales y dinámicas que capturan la atención. Cada diapositiva está cuidadosamente elaborada para maximizar el impacto de tu mensaje.</p>
                     <div class="price-container">
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20económico" class="price-btn price-economic">
-                            Básico: 30 Bs
+                            <i class="fas fa-check-circle"></i> Básico: 30 Bs
                         </a>
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20presentación%20PowerPoint%20premium" class="price-btn price-premium">
-                            Premium: 40 Bs - Diseño Exclusivo
+                            <i class="fas fa-crown"></i> Premium: 40 Bs - Diseño Exclusivo
                         </a>
                     </div>
                 </div>
 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <h3>Proyectos Digitales</h3>
+                    <h3><i class="fas fa-project-diagram"></i>Proyectos Digitales</h3>
                     <p class="service-description">Especialistas en proyectos de agroecología y textiles. Investigación exhaustiva, documentación detallada y resultados profesionales garantizados.</p>
                     <div class="price-container">
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20básico" class="price-btn price-economic">
-                            Básico: 150 - 300 Bs
+                            <i class="fas fa-check-circle"></i> Básico: 150 - 300 Bs
                         </a>
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20proyectos%20digitales%20premium" class="price-btn price-premium">
-                            Premium: 600 Bs - Control Total
+                            <i class="fas fa-crown"></i> Premium: 600 Bs - Control Total
                         </a>
                     </div>
                 </div>
 
                 <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Informes Profesionales</h3>
+                    <h3><i class="fas fa-file-alt"></i>Informes Profesionales</h3>
                     <p class="service-description">Redactamos informes concisos y bien estructurados que cumplen con los más altos estándares académicos y profesionales.</p>
                     <div class="price-container">
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20básico" class="price-btn price-economic">
-                            Básico: 15 Bs (2 hojas)
+                            <i class="fas fa-check-circle"></i> Básico: 15 Bs (2 hojas)
                         </a>
                         <a href="https://wa.me/59172292579?text=Hola,%20me%20interesa%20el%20servicio%20de%20informes%20premium" class="price-btn price-premium">
-                            Premium: 30 Bs - Sin límite de hojas
+                            <i class="fas fa-crown"></i> Premium: 30 Bs - Sin límite de hojas
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="service-card special-card" data-aos="fade-up" data-aos-delay="300">
-                <h3>Proyectos Especiales</h3>
+                <h3><i class="fas fa-star"></i>Proyectos Especiales</h3>
                 <p class="service-description">¿Necesitas un servicio personalizado? Adaptamos nuestras soluciones a tus necesidades específicas. Cada proyecto es único y merece una atención especial.</p>
                 <div class="price-container">
-                    <p style="color: #e0cfff; font-size: 1.2rem; margin-bottom: 1rem;">Precio Negociable según Proyecto</p>
+                    <p style="color: #e0cfff; font-size: 1.2rem; margin-bottom: 1rem;">
+                        <i class="fas fa-handshake"></i> Precio Negociable según Proyecto
+                    </p>
                     <a href="https://wa.me/59172292579?text=Hola,%20me%20gustaría%20negociar%20un%20trabajo%20especial" class="price-negotiate price-btn">
-                        Consulta tu Proyecto
+                        <i class="fas fa-comments"></i> Consulta tu Proyecto
                     </a>
                 </div>
             </div>
@@ -325,6 +410,31 @@
             once: true,
             offset: 100
         });
+
+        // Crear partículas flotantes
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Propiedades aleatorias
+                const size = Math.random() * 5 + 2;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = left + '%';
+                particle.style.animationDelay = delay + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
     </script>
 </body>
 </html>
