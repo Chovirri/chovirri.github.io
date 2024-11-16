@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Místico</title>
-    <link rel="icon" href="icono.png" type="image/png">
+    <title>Portal Místico - Login</title>
     <style>
         :root {
             --primary: #2d0a4e;
@@ -148,47 +147,6 @@
             color: rgba(224, 213, 255, 0.7);
         }
 
-        .content-area {
-            display: none;
-            padding: 3rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        .admin-theme {
-            background: radial-gradient(circle at center, #1a0033, #000);
-        }
-
-        .admin-content {
-            border: 2px solid var(--accent);
-            padding: 2rem;
-            border-radius: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(157, 0, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.2);
-        }
-
         #errorMessage {
             color: #ff4444;
             margin-top: 10px;
@@ -201,7 +159,7 @@
             text-align: center;
             margin-bottom: 2rem;
             background: linear-gradient(45deg, #e0d5ff, #9d00ff);
-            -webkit-background-clip: text; 
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
             position: relative;
@@ -218,15 +176,8 @@
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
 
-        .status-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background: rgba(157, 0, 255, 0.2);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            z-index: 100;
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
@@ -235,51 +186,11 @@
             100% { transform: translateY(0px); }
         }
 
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
-        /* Estilos para la tabla */
-.rankings-table {
-    width: 100%;
-    margin-top: 2rem;
-    border-collapse: collapse;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.rankings-table th, 
-.rankings-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid rgba(157, 0, 255, 0.2);
-}
-
-.rankings-table th {
-    background: rgba(157, 0, 255, 0.2);
-    color: var(--accent);
-}
-
-.rankings-table tr:hover {
-    background: rgba(157, 0, 255, 0.1);
-}
-
-.admin-badge {
-    background: linear-gradient(45deg, #ff00ee, #9d00ff);
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    margin-left: 8px;
-}
-
-.user-badge {
-    background: rgba(157, 0, 255, 0.3);
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    margin-left: 8px;
-}
-
     </style>
 </head>
 <body>
@@ -301,42 +212,6 @@
         <button class="btn" onclick="login()">Ingresar al Reino</button>
         <div id="errorMessage"></div>
     </div>
-
-    <div id="contentArea" class="content-area">
-        <h1 class="magic-title">Bienvenido al Reino Místico</h1>
-        <div id="secretContent">
-            <!-- Contenido dinámico -->
-        </div>
-    </div>
-    <div class="container">
-        <table class="rankings-table">
-            <thead>
-                <tr>
-                    <th>Usuario</th>
-                    <th>Rango</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>BOSS<span class="admin-badge">Admin</span></td>
-                    <td>Maestro Supremo</td>
-                    <td>Activo</td>
-                </tr>
-                <tr>
-                    <td>Jhojan<span class="user-badge">Socio</span></td>
-                    <td>Guardián</td>
-                    <td>Activo</td>
-                </tr>
-                <tr>
-                    <td>Tatiana<span class="user-badge">Socio</span></td>
-                    <td>Guardián</td>
-                    <td>Activo</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
@@ -406,17 +281,8 @@
         function showNoAccess() {
             alert('🔒 Acceso Denegado: Contacta al Guardián del Portal para obtener autorización.');
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 10000);
-        }
-
-        function createFeatureCard(title, description) {
-            return `
-                <div class="feature-card">
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                </div>
-            `;
+                window.location.href = 'login.html';
+            }, 1000);
         }
 
         function login() {
@@ -425,40 +291,29 @@
             const user = users[username];
 
             if (user && user.password === password) {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('contentArea').style.display = 'block';
-                
-                if (user.isAdmin) {
-                    document.body.classList.add('admin-theme');
-                    document.getElementById('contentArea').classList.add('admin-content');
-                    document.getElementById('secretContent').innerHTML = `
-                        <div class="status-indicator">👑 Modo Administrador</div>
-                        <h2 style="margin-bottom: 2rem;">Panel de Control Místico</h2>
-                        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Bienvenido, Gran Maestro. El portal está bajo tu control.</p>
-                        <div class="feature-grid">
-                            ${createFeatureCard('Gestión de Usuarios', 'Control total sobre los accesos y permisos del portal místico.')}
-                            ${createFeatureCard('Configuración Avanzada', 'Personaliza cada aspecto del reino según tus designios.')}
-                            ${createFeatureCard('Registros Arcanos', 'Visualiza toda la actividad del portal en tiempo real.')}
-                            ${createFeatureCard('Herramientas de Poder', 'Accede a funciones exclusivas de administración.')}
-                        </div>
-                    `;
-                } else {
-                    document.getElementById('secretContent').innerHTML = `
-                        <div class="status-indicator">⭐ Miembro Verificado</div>
-                        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Bienvenido al Reino Místico, ${username}.</p>
-                        <div class="feature-grid">
-                            ${createFeatureCard('Recursos Místicos', 'Accede a documentos y recursos exclusivos.')}
-                            ${createFeatureCard('Comunicación', 'Conecta con otros miembros del reino.')}
-                            ${createFeatureCard('Eventos Especiales', 'Calendario de rituales y encuentros místicos.')}
-                            ${createFeatureCard('Biblioteca Arcana', 'Explora nuestro compendio de conocimientos.')}
-                        </div>
-                    `;
-                }
+                // Guardar información del usuario en sessionStorage
+                sessionStorage.setItem('username', username);
+                sessionStorage.setItem('isAdmin', user.isAdmin);
+                window.location.href = 'zone.html';
             } else {
-                document.getElementById('errorMessage').textContent = '❌ Las credenciales místicas son incorrectas';
-                document.getElementById('errorMessage').style.animation = 'shake 0.5s';
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.textContent = '❌ Las credenciales místicas son incorrectas';
+                errorMessage.style.animation = 'shake 0.5s';
             }
         }
+
+        // Permitir login con Enter en los campos de entrada
+        document.getElementById('username').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('password').focus();
+            }
+        });
+
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
     </script>
 </body>
 </html>
