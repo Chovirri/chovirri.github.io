@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Seller Boss - Servicios Académicos Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary: #8b31ff;
@@ -25,14 +25,14 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
         @keyframes shine {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
         }
 
         * {
@@ -63,7 +63,6 @@
             padding: 4rem 0;
             position: relative;
             overflow: hidden;
-            border-bottom: 3px solid var(--gold);
         }
 
         header::before {
@@ -90,7 +89,7 @@
             font-size: 4.5rem;
             margin-bottom: 1.5rem;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            background: linear-gradient(to right, var(--light), var(--gold), var(--light));
+            background: linear-gradient(90deg, var(--light), var(--gold), var(--light));
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
@@ -105,6 +104,24 @@
             color: #e0cfff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero p:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .hero p:hover:after {
+            width: 100%;
         }
 
         .services {
@@ -122,27 +139,28 @@
             background: rgba(139, 49, 255, 0.08);
             border-radius: 20px;
             padding: 3rem;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(185, 117, 255, 0.2);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .service-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(139, 49, 255, 0.1) 0%, transparent 100%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
+            top: -100%;
+            left: -100%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transition: all 0.5s ease;
         }
 
         .service-card:hover::before {
-            transform: translateX(0);
+            top: -50%;
+            left: -50%;
         }
 
         .service-card:hover {
@@ -161,10 +179,14 @@
             gap: 1rem;
         }
 
-        .service-card h3::before {
-            content: '★';
+        .service-card h3 i {
             color: var(--gold);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover h3 i {
+            transform: scale(1.2) rotate(360deg);
         }
 
         .service-description {
@@ -175,6 +197,12 @@
             position: relative;
             padding-left: 1.5rem;
             border-left: 3px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-description {
+            border-left-color: var(--gold);
+            padding-left: 2rem;
         }
 
         .price-container {
@@ -199,10 +227,22 @@
             text-align: center;
             font-size: 1.1rem;
             gap: 0.5rem;
+            overflow: hidden;
         }
 
-        .price-btn i {
-            font-size: 1.2rem;
+        .price-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .price-btn:hover::before {
+            left: 100%;
         }
 
         .price-economic {
@@ -221,7 +261,7 @@
         }
 
         .price-premium:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.05);
             filter: brightness(1.1);
         }
 
@@ -267,6 +307,38 @@
             margin-left: 0.5rem;
             font-size: 1.2rem;
             vertical-align: middle;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .floating-particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-particle 15s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -296,34 +368,32 @@
             }
         }
 
-        /* Nuevas animaciones y efectos */
-        .floating-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.5);
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            pointer-events: none;
-            animation: float-particle 15s infinite linear;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        @keyframes float-particle {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            background: var(--secondary);
         }
     </style>
 </head>
@@ -398,6 +468,10 @@
         </div>
     </section>
 
+    <div class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <footer>
         <div class="container">
             <p>© 2024 Project Seller Boss. Todos los derechos reservados.</p>
@@ -411,7 +485,6 @@
             offset: 100
         });
 
-        // Crear partículas flotantes
         function createParticles() {
             const container = document.getElementById('particles');
             const particleCount = 50;
@@ -420,7 +493,6 @@
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                // Propiedades aleatorias
                 const size = Math.random() * 5 + 2;
                 const left = Math.random() * 100;
                 const delay = Math.random() * 15;
@@ -435,6 +507,36 @@
         }
 
         createParticles();
+
+        // Botón de scroll to top
+        const scrollToTop = document.querySelector('.scroll-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTop.classList.add('visible');
+            } else {
+                scrollToTop.classList.remove('visible');
+            }
+        });
+
+        scrollToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Efecto hover en las cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
     </script>
 </body>
 </html>
