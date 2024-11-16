@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Místico</title>
-    <link rel="icon" href="icono.png" type="image/png">
     <style>
         :root {
             --primary: #2d0a4e;
@@ -201,7 +200,7 @@
             text-align: center;
             margin-bottom: 2rem;
             background: linear-gradient(45deg, #e0d5ff, #9d00ff);
-            -webkit-background-clip: text;
+            -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
             position: relative;
@@ -238,6 +237,48 @@
         .floating-element {
             animation: float 6s ease-in-out infinite;
         }
+        /* Estilos para la tabla */
+.rankings-table {
+    width: 100%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.rankings-table th, 
+.rankings-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+}
+
+.rankings-table th {
+    background: rgba(157, 0, 255, 0.2);
+    color: var(--accent);
+}
+
+.rankings-table tr:hover {
+    background: rgba(157, 0, 255, 0.1);
+}
+
+.admin-badge {
+    background: linear-gradient(45deg, #ff00ee, #9d00ff);
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-left: 8px;
+}
+
+.user-badge {
+    background: rgba(157, 0, 255, 0.3);
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-left: 8px;
+}
+
     </style>
 </head>
 <body>
@@ -266,6 +307,35 @@
             <!-- Contenido dinámico -->
         </div>
     </div>
+    <div class="container">
+        <table class="rankings-table">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Rango</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BOSS<span class="admin-badge">Admin</span></td>
+                    <td>Maestro Supremo</td>
+                    <td>Activo</td>
+                </tr>
+                <tr>
+                    <td>Jhojan<span class="user-badge">Socio</span></td>
+                    <td>Guardián</td>
+                    <td>Activo</td>
+                </tr>
+                <tr>
+                    <td>Tatiana<span class="user-badge">Socio</span></td>
+                    <td>Guardián</td>
+                    <td>Activo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
