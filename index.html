@@ -395,6 +395,34 @@
             transform: translateY(-5px);
             background: var(--secondary);
         }
+        .restricted-zone {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .restricted-zone:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+            background: linear-gradient(45deg, #cc0000, #990000);
+        }
+
+        .restricted-zone i {
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
@@ -466,6 +494,10 @@
                 </div>
             </div>
         </div>
+        <a href="P1.html" class="restricted-zone">
+            <i class="fas fa-lock"></i>
+            ZONA RESTRINGIDA
+        </a>
     </section>
 
     <div class="scroll-to-top">
