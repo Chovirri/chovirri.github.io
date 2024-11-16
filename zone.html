@@ -1,1 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Místico - Zona Restringida</title>
+    <style>
+        :root {
+            --primary: #2d0a4e;
+            --accent: #9d00ff;
+            --text: #e0d5ff;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at center, var(--primary), #150426);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .content-area {
+            padding: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .admin-theme {
+            background: radial-gradient(circle at center, #1a0033, #000);
+        }
+
+        .admin-content {
+            border: 2px solid var(--accent);
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(157, 0, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.2);
+        }
+
+        .magic-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #e0d5ff, #9d00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
+            position: relative;
+        }
+
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(157, 0, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 100;
+        }
+
+        .rankings-table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .rankings-table th, 
+        .rankings-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+        }
+
+        .rankings-table th {
+            background: rgba(157, 0, 255, 0.2);
+            color: var(--accent);
+        }
+
+        .rankings-table tr:hover {
+            background: rgba(157, 0, 255, 0.1);
+        }
+
+        .admin-badge {
+            background: linear-gradient(45deg, #ff00ee, #9d00ff);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+
+        .user-badge {
+            background: rgba(157, 0, 255, 0.3);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--accent), #6a00ff);
+            border: none;
+            padding: 15px 30px;
+            margin: 15px;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div id="contentArea" class="content-area">
+        <h1 class="magic-title">Bienvenido al Reino Místico</h1>
+        <div id="secretContent">
+            <!-- El contenido se llenará dinámicamente -->
+        </div>
+        
+        <div class="container">
+            <table class="rankings-table">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Rango</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BOSS<span class="admin-badge">Admin</span></td>
+                        <td>Maestro Supremo</td>
+                        <td>Activo</td>
+                    </tr>
+                    <tr>
+                        <td>Jhojan<span class="user-badge">Socio</span></td>
+                        <td>Guardián</td>
+                        <td>Activo</td>
+                    </tr>
+                    <tr>
+                        <td>Tatiana<span class="user-badge">Socio</span></td>
+                        <td>Guardián</td>
+                        <td>Activo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Verificar si el usuario está autenticado
+        const username = sessionStorage.getItem('username');
+        const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+
+        if (!username) {
+            window.location.href = 'login.html';
+        }
+
+        // Configurar partículas
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#9d00ff' },
+                shape: { type: 'circle' },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: { enable: true, speed: 4, minimumValue: 0.3, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#9d00ff',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        function createFeatureCard(title, description) {
+            return `
+                <div class="feature-card">
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                </div>
+            `;
+        }
+
+        // Configurar contenido según el tipo de usuario
+        if (isAdmin) {
+            document.body.classList.add('admin-theme');
+            document.getElementById('contentArea').classList.add('admin-content');
+            document.getElementById('secretContent').innerHTML = `
+                <div class="status-indicator">👑 Modo Administrador</div>
+                <h2 style="margin-bottom: 2rem;">Panel de Control Místico</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Bienvenido, Gran Maestro. El portal está bajo tu control.</p>
+                <div class="feature-grid">
+                    ${createFeatureCard('Gestión de Usuarios', 'Control total sobre los accesos y permisos del portal místico.')}
+                    ${createFeatureCard('Configuración Avanzada', 'Personaliza cada aspecto del reino según tus designios.')}
+                    ${createFeatureCard('Registros Arcanos', 'Visualiza toda la actividad del portal en tiempo real.')}
+                    ${createFeatureCard('Herramientas de Poder', 'Accede a funciones exclusivas de administración.')}
+                </div>
+            `;
+        } else {
+            document.getElementById('secretContent').innerHTML = `
+                <div class="status-indicator">⭐ Miembro Verificado</div>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Bienvenido al Reino Místico, ${username}.</p>
+                <div class="feature-grid">
+                    ${createFeatureCard('Recursos Místicos', 'Accede a documentos y recursos exclusivos.')}
+                    ${createFeatureCard('Comunicación', 'Conecta con otros miembros del reino.')}
+                    ${createFeatureCard('Eventos Especiales', 'Calendario de rituales y encuentros místicos.')}
+                    ${createFeatureCard('Biblioteca Arcana', 'Explora nuestro compendio de conocimientos.')}
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
