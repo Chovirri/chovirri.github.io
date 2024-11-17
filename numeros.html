@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicación - Portal Místico</title>
+    <style>
+        :root {
+            --primary: #2d0a4e;
+            --accent: #9d00ff;
+            --text: #e0d5ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at center, var(--primary), #150426);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(157, 0, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-info h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), #6a00ff);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.4);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #e0d5ff, #9d00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Volver al Portal</a>
+        <h1 class="title">Comunicación Mística</h1>
+        
+        <div class="contact-list">
+            <div class="contact-card">
+                <div class="contact-info">
+                    <h3>Soporte General</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p>soporte@reinomistico.com</p>
+                </div>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-info">
+                    <h3>Emergencias Místicas</h3>
+                    <p>+1 (555) 987-6543</p>
+                    <p>emergencias@reinomistico.com</p>
+                </div>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-info">
+                    <h3>Consultas Especiales</h3>
+                    <p>+1 (555) 456-7890</p>
+                    <p>consultas@reinomistico.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

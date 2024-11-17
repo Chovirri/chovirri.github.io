@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros Arcanos - Portal Místico</title>
+    <style>
+        :root {
+            --primary: #2d0a4e;
+            --accent: #9d00ff;
+            --text: #e0d5ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at center, var(--primary), #150426);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logs-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            height: 500px;
+            overflow-y: auto;
+            margin-top: 2rem;
+            font-family: monospace;
+        }
+
+        .log-entry {
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .log-entry:hover {
+            background: rgba(157, 0, 255, 0.1);
+        }
+
+        .log-time {
+            color: var(--accent);
+            min-width: 150px;
+        }
+
+        .log-type {
+            min-width: 100px;
+            padding: 0.2rem 0.5rem;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .log-type.info {
+            background: rgba(0, 255, 255, 0.2);
+            color: cyan;
+        }
+
+        .log-type.warning {
+            background: rgba(255, 255, 0, 0.2);
+            color: yellow;
+        }
+
+        .log-type.error {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff4444;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), #6a00ff);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.4);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #e0d5ff, #9d00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-button {
+            background: rgba(157, 0, 255, 0.1);
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Volver al Portal</a>
+        <h1 class="title">Registros Arcanos</h1>
+        
+        <div class="filters">
+            <button class="filter-button active">Todos</button>
+            <button class="filter-button">Info</button>
+            <button class="filter-button">Advertencias</button>
+            <button class="filter-button">Errores</button>
+        </div>
+
+        <div class="logs-container">
+            <div class="log-entry">
+                <span class="log-time">2024-03-20 15:30:45</span>
+                <span class="log-type info">INFO</span>
+                <span class="log-message">Usuario BOSS inició sesión</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">2024-03-20 15:29:30</span>
+                <span class="log-type warning">WARN</span>
+                <span class="log-message">Intento de acceso no autorizado detectado</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">2024-03-20 15:28:15</span>
+                <span class="log-type error">ERROR</span>
+                <span class="log-message">Fallo en la sincronización de datos</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">2024-03-20 15:27:00</span>
+                <span class="log-type info">INFO</span>
+                <span class="log-message">Nuevo evento creado: Ritual de Luna Llena</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">2024-03-20 15:26:45</span>
+                <span class="log-type info">INFO</span>
+                <span class="log-message">Usuario Jhojan actualizó su perfil</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

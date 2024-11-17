@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramientas de Poder - Portal Místico</title>
+    <style>
+        :root {
+            --primary: #2d0a4e;
+            --accent: #9d00ff;
+            --text: #e0d5ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at center, var(--primary), #150426);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(157, 0, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.2);
+        }
+
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent), #6a00ff);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), #6a00ff);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.4);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #e0d5ff, #9d00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tool-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .tool-description {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .use-button {
+            background: linear-gradient(45deg, #ff00ee, #9d00ff);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .use-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 15px rgba(157, 0, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Volver al Portal</a>
+        <h1 class="title">Herramientas de Poder</h1>
+        
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🔮</div>
+                <h3 class="tool-title">Generador de Portales</h3>
+                <p class="tool-description">Crea y gestiona portales místicos para diferentes dimensiones.</p>
+                <a href="#" class="use-button">Usar Herramienta</a>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">⚡</div>
+                <h3 class="tool-title">Control de Energía</h3>
+                <p class="tool-description">Monitorea y ajusta los flujos de energía del portal.</p>
+                <a href="#" class="use-button">Usar Herramienta</a>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">🔒</div>
+                <h3 class="tool-title">Protección Arcana</h3>
+                <p class="tool-description">Configura barreras y sistemas de protección mágica.</p>
+                <a href="#" class="use-button">Usar Herramienta</a>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">📊</div>
+                <h3 class="tool-title">Análisis Místico</h3>
+                <p class="tool-description">Analiza patrones y tendencias en las energías místicas.</p>
+                <a href="#" class="use-button">Usar Herramienta</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
