@@ -69,6 +69,10 @@
             border-radius: 15px;
             border: 1px solid rgba(157, 0, 255, 0.2);
             transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text);
+            display: block;
         }
 
         .feature-card:hover {
@@ -155,6 +159,12 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 20px rgba(157, 0, 255, 0.4);
         }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -198,7 +208,6 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Verificar si el usuario está autenticado
         const username = sessionStorage.getItem('username');
         const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
 
@@ -206,7 +215,15 @@
             window.location.href = 'login.html';
         }
 
-        // Configurar partículas
+        function createFeatureCard(title, description, link) {
+            return `
+                <a href="${link}" class="feature-card">
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                </a>
+            `;
+        }
+
         particlesJS('particles-js', {
             particles: {
                 number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -250,16 +267,6 @@
             retina_detect: true
         });
 
-        function createFeatureCard(title, description) {
-            return `
-                <div class="feature-card">
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                </div>
-            `;
-        }
-
-        // Configurar contenido según el tipo de usuario
         if (isAdmin) {
             document.body.classList.add('admin-theme');
             document.getElementById('contentArea').classList.add('admin-content');
@@ -268,10 +275,10 @@
                 <h2 style="margin-bottom: 2rem;">Panel de Control Místico</h2>
                 <p style="font-size: 1.2rem; margin-bottom: 2rem;">Bienvenido, Gran Maestro. El portal está bajo tu control.</p>
                 <div class="feature-grid">
-                    ${createFeatureCard('Gestión de Usuarios', 'Control total sobre los accesos y permisos del portal místico.')}
-                    ${createFeatureCard('Configuración Avanzada', 'Personaliza cada aspecto del reino según tus designios.')}
-                    ${createFeatureCard('Registros Arcanos', 'Visualiza toda la actividad del portal en tiempo real.')}
-                    ${createFeatureCard('Herramientas de Poder', 'Accede a funciones exclusivas de administración.')}
+                    ${createFeatureCard('Gestión de Usuarios', 'Control total sobre los accesos y permisos del portal místico.', 'usuarios.html')}
+                    ${createFeatureCard('Configuración Avanzada', 'Personaliza cada aspecto del reino según tus designios.', 'configuracion.html')}
+                    ${createFeatureCard('Registros Arcanos', 'Visualiza toda la actividad del portal en tiempo real.', 'registros.html')}
+                    ${createFeatureCard('Herramientas de Poder', 'Accede a funciones exclusivas de administración.', 'herramientas.html')}
                 </div>
             `;
         } else {
@@ -279,10 +286,10 @@
                 <div class="status-indicator">⭐ Miembro Verificado</div>
                 <p style="font-size: 1.2rem; margin-bottom: 2rem;">Bienvenido al Reino Místico, ${username}.</p>
                 <div class="feature-grid">
-                    ${createFeatureCard('Recursos Místicos', 'Accede a documentos y recursos exclusivos.')}
-                    ${createFeatureCard('Comunicación', 'Conecta con otros miembros del reino.')}
-                    ${createFeatureCard('Eventos Especiales', 'Calendario de rituales y encuentros místicos.')}
-                    ${createFeatureCard('Biblioteca Arcana', 'Explora nuestro compendio de conocimientos.')}
+                    ${createFeatureCard('Recursos Místicos', 'Accede a documentos y recursos exclusivos.', 'repositorio.html')}
+                    ${createFeatureCard('Comunicación', 'Conecta con otros miembros del reino.', 'numeros.html')}
+                    ${createFeatureCard('Eventos Especiales', 'Calendario de rituales y encuentros místicos.', 'eventos.html')}
+                    ${createFeatureCard('Biblioteca Arcana', 'Explora nuestro compendio de conocimientos.', 'biblioteca.html')}
                 </div>
             `;
         }
