@@ -1,0 +1,411 @@
+/* --- Reset & Base Styles --- */
+:root {
+  --primary-color: #c59d5f;   /* Elegant Gold */
+  --secondary-color: #4a3f35; /* Deep, Warm Brown */
+  --background-color: #f9f6f1; /* Off-white, warm */
+  --light-bg-color: #ffffff;   /* Clean White */
+  --text-color: #3d3d3d;
+  --accent-color: #6b7a5a;    /* Muted Olive Green */
+  --subtle-border-color: #e5e0d7;
+
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+  
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px; /* Offset for fixed header */
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.7;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--secondary-color);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --- Utility Classes --- */
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #b18c54;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.content-section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.content-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.section-text {
+    font-size: 1.1rem;
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.bg-light {
+    background-color: var(--light-bg-color);
+}
+
+/* --- Header & Navigation --- */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(249, 246, 241, 0.8); /* Semi-transparent background */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--subtle-border-color);
+  padding: 20px 5%;
+  transition: padding 0.3s ease;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+.nav-link {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: color 0.3s ease;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+
+/* --- Hero Section --- */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://github.com/Chovirri/TuaTa.github.io/blob/main/logo.png?raw=true') no-repeat center center/cover;
+}
+
+.hero-content {
+    animation: fadeIn 2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Products Section --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.product-card {
+    background: var(--light-bg-color);
+    border: 1px solid var(--subtle-border-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-smooth);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+.product-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.product-description-short {
+    font-size: 0.95rem;
+    color: #777;
+    line-height: 1.5;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.price-old {
+    text-decoration: line-through;
+    color: #aaa;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.price-current {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+}
+
+.btn-expand {
+    background-color: var(--secondary-color);
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    border-radius: 6px;
+    padding: 14px;
+}
+
+.btn-expand:hover {
+    background-color: #382e26;
+}
+
+/* --- Social Media Section --- */
+#social {
+    padding-bottom: 100px; /* Add some extra padding at the bottom */
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* For smaller screens */
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.social-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--light-bg-color);
+    border: 1px solid var(--subtle-border-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.social-icon-link svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--secondary-color);
+    transition: fill 0.3s ease;
+}
+
+.social-icon-link:hover {
+    transform: translateY(-6px);
+}
+
+/* Facebook hover */
+.social-icon-link.facebook:hover {
+    border-color: rgba(24, 119, 242, 0.5);
+    box-shadow: 0 0 25px rgba(24, 119, 242, 0.4);
+}
+.social-icon-link.facebook:hover svg {
+    fill: #1877F2;
+}
+
+/* YouTube hover */
+.social-icon-link.youtube:hover {
+    border-color: rgba(255, 0, 0, 0.5);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+}
+.social-icon-link.youtube:hover svg {
+    fill: #FF0000;
+}
+
+/* TikTok hover */
+.social-icon-link.tiktok:hover {
+    border-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+.social-icon-link.tiktok:hover svg {
+    fill: #010101;
+}
+
+/* Instagram hover */
+.social-icon-link.instagram:hover {
+    border-color: rgba(193, 53, 132, 0.5);
+    box-shadow: 0 0 25px rgba(193, 53, 132, 0.4);
+}
+.social-icon-link.instagram:hover svg {
+    fill: #E4405F; /* Using the pinkish color from the gradient */
+}
+
+/* --- Footer --- */
+.main-footer {
+    background-color: var(--secondary-color);
+    color: rgba(249, 246, 241, 0.8);
+    text-align: center;
+    padding: 30px;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; 
+    }
+
+    .main-header {
+        padding: 15px 5%;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-icons {
+        gap: 20px;
+    }
+    .social-icon-link {
+        width: 56px;
+        height: 56px;
+    }
+    .social-icon-link svg {
+        width: 26px;
+        height: 26px;
+    }
+}
