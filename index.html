@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Historia | Time Capsule</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Audio Player (Hidden) -->
+    <audio id="audio-player" loop></audio>
+
+    <!-- 1. Landing Screen -->
+    <section id="landing" class="screen active">
+        <div class="landing-bg"></div>
+        <div class="landing-content">
+            <h1 class="title">Nuestra Historia</h1>
+            <p class="subtitle">Una colección de momentos eternos</p>
+            <button id="enter-btn" class="btn-elegant">Abrir Cápsula</button>
+        </div>
+    </section>
+
+    <!-- 2. Gallery Screen -->
+    <section id="gallery" class="screen hidden">
+        
+        <!-- Background Image Container -->
+        <div id="slide-bg" class="slide-bg"></div>
+
+        <!-- Controls -->
+        <button id="prev-btn" class="nav-btn left">←</button>
+        <button id="next-btn" class="nav-btn right">→</button>
+
+        <!-- Floating Content -->
+        <div class="content-overlay">
+            <div class="text-card">
+                <span class="date-badge" id="slide-date"></span>
+                <h2 id="slide-text"></h2>
+                <div class="audio-indicator">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span id="music-label">Reproduciendo ambiente...</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="javascrip.js"></script>
+</body>
+</html>
