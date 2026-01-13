@@ -3,48 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Historia | Time Capsule</title>
+    <title>Nuestra Historia | Menú</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
+    <!-- Audio Background (Opcional, música suave de menú) -->
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=acoustic-guitar-loop-f-91bpm-132687.mp3" type="audio/mp3">
+    </audio>
 
-    <!-- Audio Player (Hidden) -->
-    <audio id="audio-player" loop></audio>
-
-    <!-- 1. Landing Screen -->
-    <section id="landing" class="screen active">
-        <div class="landing-bg"></div>
-        <div class="landing-content">
-            <h1 class="title">Nuestra Historia</h1>
-            <p class="subtitle">Una colección de momentos eternos</p>
-            <button id="enter-btn" class="btn-elegant">Abrir Cápsula</button>
+    <!-- Landing / Intro -->
+    <section id="intro-screen" class="screen active">
+        <div class="background-overlay"></div>
+        <div class="intro-content">
+            <h1 class="main-title">Nuestra Cápsula</h1>
+            <p class="subtitle">5 Momentos, 1 Historia Eterna</p>
+            <button id="open-capsule-btn" class="btn-gold">Abrir Recuerdos</button>
         </div>
     </section>
 
-    <!-- 2. Gallery Screen -->
-    <section id="gallery" class="screen hidden">
-        
-        <!-- Background Image Container -->
-        <div id="slide-bg" class="slide-bg"></div>
+    <!-- Menú de Capítulos -->
+    <section id="menu-screen" class="screen hidden">
+        <div class="menu-container">
+            <h2 class="menu-title">Selecciona un Momento</h2>
+            
+            <div class="cards-grid">
+                
+                <!-- 1. Machia -->
+                <a href="machia.html" class="chapter-card">
+                    <div class="card-icon">🌿</div>
+                    <div class="card-info">
+                        <h3>Visita Parque Machia</h3>
+                        <span class="card-date">Lunes 13 de Octubre, 2025</span>
+                    </div>
+                </a>
 
-        <!-- Controls -->
-        <button id="prev-btn" class="nav-btn left">←</button>
-        <button id="next-btn" class="nav-btn right">→</button>
+                <!-- 2. Plaza -->
+                <a href="plaza.html" class="chapter-card">
+                    <div class="card-icon">⛲</div>
+                    <div class="card-info">
+                        <h3>Foto en la Plaza</h3>
+                        <span class="card-date">Lunes 20 de Octubre, 2025</span>
+                    </div>
+                </a>
 
-        <!-- Floating Content -->
-        <div class="content-overlay">
-            <div class="text-card">
-                <span class="date-badge" id="slide-date"></span>
-                <h2 id="slide-text"></h2>
-                <div class="audio-indicator">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span id="music-label">Reproduciendo ambiente...</span>
-                </div>
+                <!-- 3. Hormiga -->
+                <a href="hormiga.html" class="chapter-card">
+                    <div class="card-icon">🐜</div>
+                    <div class="card-info">
+                        <h3>Parque Hormiga</h3>
+                        <span class="card-date">Jueves 23 de Octubre, 2025</span>
+                    </div>
+                </a>
+
+                <!-- 4. Cumpleaños -->
+                <a href="cumple.html" class="chapter-card">
+                    <div class="card-icon">✨</div>
+                    <div class="card-info">
+                        <h3>Tu Cumpleaños :)</h3>
+                        <span class="card-date">Martes 4 de Noviembre, 2025</span>
+                    </div>
+                </a>
+
+                <!-- 5. Cita -->
+                <a href="cita.html" class="chapter-card">
+                    <div class="card-icon">🥂</div>
+                    <div class="card-info">
+                        <h3>Nuestra Cita &lt;3</h3>
+                        <span class="card-date">Miércoles 10 de Diciembre, 2025</span>
+                    </div>
+                </a>
+
             </div>
         </div>
-
     </section>
 
     <script src="javascrip.js"></script>

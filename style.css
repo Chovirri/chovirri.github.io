@@ -1,13 +1,15 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap');
 
 :root {
-    --color-bg: #fdfbf7;
-    --color-text: #2c2c2c;
-    --color-accent: #d4af37; /* Gold */
-    --font-serif: 'Cormorant Garamond', serif;
-    --font-sans: 'Montserrat', sans-serif;
-    --transition-speed: 1.5s;
+    --bg-color: #0f0f13;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --text-main: #f0f0f0;
+    --text-muted: #a0a0a0;
+    --gold: #d4af37;
+    --gold-glow: rgba(212, 175, 55, 0.3);
+    --font-title: 'Cinzel', serif;
+    --font-body: 'Lato', sans-serif;
 }
 
 * {
@@ -16,220 +18,256 @@
     box-sizing: border-box;
 }
 
-body, html {
-    height: 100%;
-    width: 100%;
-    overflow: hidden; /* Prevent scrolling for app-like feel */
-    background-color: var(--color-bg);
-    font-family: var(--font-sans);
-    color: var(--color-text);
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* --- Screens Management --- */
+/* --- Animaciones Generales --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Pantallas --- */
 .screen {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    transition: opacity var(--transition-speed) ease;
+    min-height: 100vh;
+    transition: opacity 1s ease, visibility 1s;
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
     z-index: 1;
 }
 
 .screen.active {
     opacity: 1;
-    pointer-events: all;
-    z-index: 10;
+    visibility: visible;
+    position: relative; /* Para permitir scroll en el grid */
+    z-index: 2;
 }
 
-/* --- Landing Styles --- */
-#landing {
+.hidden {
+    display: none;
+}
+
+/* --- Intro Screen --- */
+#intro-screen {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    height: 100vh;
+    position: fixed; /* Intro siempre fija */
+    overflow: hidden;
 }
 
-.landing-bg {
+.background-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://images.unsplash.com/photo-1516961642265-531546e84af2?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
-    filter: brightness(0.6) sepia(0.2);
+    background: radial-gradient(circle at center, #1a1a24 0%, #000 100%);
     z-index: -1;
-    transition: transform 20s ease;
 }
 
-/* Slow zoom effect on landing */
-#landing.active .landing-bg {
-    transform: scale(1.1);
-}
-
-.landing-content {
-    color: white;
-    z-index: 2;
+.intro-content {
+    text-align: center;
     padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(5px);
-    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
 }
 
-.title {
-    font-family: var(--font-serif);
-    font-size: 4rem;
-    font-weight: 300;
-    font-style: italic;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
+.main-title {
+    font-family: var(--font-title);
+    font-size: 3.5rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px var(--gold-glow);
 }
 
 .subtitle {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-bottom: 3rem;
-    opacity: 0.9;
-}
-
-.btn-elegant {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
-    color: white;
-    padding: 1rem 3rem;
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.5s ease;
-}
-
-.btn-elegant:hover {
-    background: white;
-    color: #1a1a1a;
-    border-color: white;
-}
-
-/* --- Gallery Styles --- */
-#slide-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: background-image 1s ease-in-out, opacity 1s ease;
-}
-
-/* Dim overlay for text readability */
-#slide-bg::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
-}
-
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    color: rgba(255,255,255,0.5);
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 2rem;
-    transition: color 0.3s;
-    z-index: 20;
-    font-family: var(--font-serif);
-}
-
-.nav-btn:hover {
-    color: white;
-}
-
-.nav-btn.left { left: 0; }
-.nav-btn.right { right: 0; }
-
-.content-overlay {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 600px;
-    text-align: center;
-    color: white;
-    z-index: 20;
-}
-
-.date-badge {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
     letter-spacing: 3px;
-    color: var(--color-accent);
-    margin-bottom: 1rem;
     text-transform: uppercase;
-    opacity: 0; /* Animated via JS */
-    transform: translateY(20px);
-    transition: all 0.8s ease;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
 }
 
-#slide-text {
-    font-family: var(--font-serif);
-    font-size: 2.5rem;
-    font-weight: 400;
-    line-height: 1.3;
-    margin-bottom: 2rem;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    opacity: 0; /* Animated via JS */
-    transform: translateY(20px);
-    transition: all 0.8s ease 0.2s;
+.btn-gold {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-title);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Animation classes applied by JS */
-.fade-up-active .date-badge,
-.fade-up-active #slide-text {
-    opacity: 1;
-    transform: translateY(0);
+.btn-gold:hover {
+    background: var(--gold);
+    color: #000;
+    box-shadow: 0 0 20px var(--gold-glow);
 }
 
-/* Audio Indicator */
-.audio-indicator {
+/* --- Menu Grid Screen --- */
+#menu-screen {
+    padding: 4rem 2rem;
+    background: radial-gradient(circle at top, #1a1a24 0%, #050505 100%);
+}
+
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-title {
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1rem;
+    display: inline-block;
+    width: 100%;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.chapter-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.4s ease;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    opacity: 0.7;
-    font-size: 0.8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.bar {
-    width: 3px;
-    height: 10px;
-    background-color: var(--color-accent);
-    animation: equalizer 1s infinite;
+.chapter-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.08);
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.bar:nth-child(2) { animation-delay: 0.2s; }
-.bar:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes equalizer {
-    0%, 100% { height: 5px; }
-    50% { height: 15px; }
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.4s ease;
 }
 
+.chapter-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+.card-info h3 {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+}
+
+.card-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* --- Gallery Pages (Ghost Mode) --- */
+.gallery-wrapper {
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(circle at center, #15151a 0%, #000 100%);
+}
+
+.back-btn {
+    align-self: flex-start;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    transition: color 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+}
+
+.back-btn:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: fadeIn 1s ease;
+}
+
+.gallery-header h1 {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.date-subtitle {
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+
+.ghost-container {
+    border: 2px dashed rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 4rem;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    animation: fadeIn 1.5s ease;
+    background: rgba(255,255,255,0.02);
+}
+
+.ghost-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.ghost-details {
+    margin-top: 1rem;
+    color: var(--gold);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* Responsivo */
 @media (max-width: 768px) {
-    .title { font-size: 2.5rem; }
-    #slide-text { font-size: 1.8rem; }
+    .main-title { font-size: 2.5rem; }
+    .gallery-header h1 { font-size: 1.8rem; }
+    .cards-grid { grid-template-columns: 1fr; }
 }

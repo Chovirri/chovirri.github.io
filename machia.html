@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parque Machia | 13 Oct 2025</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* --- ESTILOS ESPECÍFICOS PARA MACHIA (CSS en HTML) --- */
+        
+        /* 1. Cambio de Tema: Sobrescribimos el dorado por Verde Esmeralda */
+        :root {
+            --machia-accent: #2ecc71; /* Emerald Green */
+            --machia-glow: rgba(46, 204, 113, 0.3);
+        }
+
+        body {
+            /* Fondo ligeramente tintado de verde muy oscuro */
+            background: radial-gradient(circle at top, #0f1812 0%, #050505 100%);
+        }
+
+        h1, h2, .date-subtitle {
+            color: var(--machia-accent) !important;
+            text-shadow: 0 0 15px var(--machia-glow);
+        }
+
+        .back-btn:hover {
+            color: var(--machia-accent);
+            border-color: var(--machia-accent);
+        }
+
+        /* 2. Estructura Narrativa */
+        .story-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-bottom: 5rem;
+        }
+
+        .story-section {
+            margin-bottom: 6rem;
+            opacity: 0; /* Para animación con JS */
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .story-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .section-text h2 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(46, 204, 113, 0.2);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-text p {
+            font-family: var(--font-body);
+            color: #ccc;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* 3. Layouts de Fotos */
+        
+        /* Imágenes generales */
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        img:hover {
+            transform: scale(1.02);
+            filter: brightness(1) contrast(1);
+            z-index: 10;
+        }
+
+        /* SECCION 1: PAISAJE (2 Horizontales grandes) */
+        .grid-landscape {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 350px; /* Altura fija para uniformidad */
+        }
+
+        /* SECCION 2: MONOS (3 Horizontales - Estilo Collage) */
+        .grid-nature {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            grid-template-rows: 250px 250px;
+        }
+        /* La primera foto ocupa todo el ancho arriba */
+        .grid-nature .photo-box:nth-child(1) {
+            grid-column: 1 / -1; 
+        }
+
+        /* SECCION 3: MONUMENTO (3 Verticales) */
+        .grid-monument {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            height: 500px; /* Altura para fotos verticales */
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-landscape, .grid-nature, .grid-monument {
+                grid-template-columns: 1fr;
+                height: auto;
+                grid-template-rows: auto;
+            }
+            .grid-monument img {
+                aspect-ratio: 3/4; /* Forzar aspecto vertical en móvil */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-wrapper">
+        <!-- Botón Volver -->
+        <a href="index.html" class="back-btn">← Volver al Menú</a>
+
+        <div class="gallery-header">
+            <h1>Visita Parque Machia</h1>
+            <p class="date-subtitle">Lunes 13 de Octubre, 2025</p>
+        </div>
+
+        <div class="story-container">
+
+            <!-- SECCIÓN 1: PAISAJE (2 Fotos Horizontales) -->
+            <section class="story-section scroll-reveal">
+                <div class="section-text">
+                    <h2>La Inmensidad del Valle</h2>
+                    <p>"Desde lo alto, donde el viento susurra historias antiguas y el verde abraza el cielo."</p>
+                </div>
+                <div class="grid-landscape">
+                    <!-- FOTO 1: Paisaje Panorámico Picada Alta -->
+                    <div class="photo-box">
+                        <img src="Galeria de fotos/Paisaje.jpg" alt="Paisaje Picada Alta 1">
+                    </div>
+                    <!-- FOTO 2: Paisaje Panorámico Picada Alta -->
+                    <div class="photo-box">
+                        <img src="Galeria de fotos/paisaje2.jpg" alt="Paisaje Picada Alta 2">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: MONOS (3 Fotos Horizontales) -->
+            <section class="story-section scroll-reveal">
+                <div class="section-text">
+                    <h2>Entre Ramas y Sombras</h2>
+                    <p>"Pequeños habitantes curiosos que nos observan desde su hogar natural."</p>
+                </div>
+                <div class="grid-nature">
+                    <!-- FOTO 1: Mono Horizontal (Principal) -->
+                    <div class="photo-box">
+                        <img src="Galeria de fotos/mono1.jpg" alt="Mono en Arbol 1">
+                    </div>
+                    <!-- FOTO 2: Mono Horizontal -->
+                    <div class="photo-box">
+                        <img src="Galeria de fotos/mono2.jpg" alt="Mono en Arbol 2">
+                    </div>
+                    <!-- FOTO 3: Mono Horizontal -->
+                    <div class="photo-box">
+                        <img src="Galeria de fotos/mono3.jpg" alt="Mono en Arbol 3">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: MONUMENTO COCODRILO (3 Fotos Verticales) -->
+            <section class="story-section scroll-reveal">
+                <div class="section-text">
+                    <h2>El Guardián de Piedra</h2>
+                    <p>"El monumento del cocodrilo, testigo silencioso de nuestro paso por el parque."</p>
+                </div>
+                <div class="grid-monument">
+                    <!-- FOTO 1: Monumento Vertical -->
+                    <div class="photo-box">
+                        <img src="Galeria de fotos/cocodrilotomacerca.jpg" alt="Cocodrilo Vertical 1">
+                    </div>
+                    <!-- FOTO 2: Monumento Vertical -->
+                    <div class="photo-box">
+                        <img src="Galeria de fotos/cocodrilo2.jpg" alt="Cocodrilo Vertical 2">
+                    </div>
+                    <!-- FOTO 3: Monumento Vertical -->
+                    <div class="photo-box">
+                        <img src="Galeria de fotos/cocodrilo3.jpg" alt="Cocodrilo Vertical 3">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
