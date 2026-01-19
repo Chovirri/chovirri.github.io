@@ -38,7 +38,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Lógica para páginas internas (Galerías) ---
-    // Aquí agregaremos la lógica de galería real cuando me des las fotos
+    
+    // 1. Detección de Scroll para animaciones (Scroll Reveal)
+    const scrollElements = document.querySelectorAll('.scroll-reveal');
+    
+    if (scrollElements.length > 0) {
+        const observerOptions = {
+            threshold: 0.15, // Se activa cuando el 15% del elemento es visible
+            rootMargin: "0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Opcional: dejar de observar si solo queremos que aparezca una vez
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        scrollElements.forEach(el => observer.observe(el));
+    }
+
+    // 2. Mensaje consola para modo fantasma
     const ghostContainer = document.querySelector('.ghost-container');
     if (ghostContainer) {
         console.log("Galería en modo espera. Listo para recibir imágenes.");
