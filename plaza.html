@@ -181,10 +181,31 @@
         .audio-control {
             position: fixed; bottom: 30px; right: 30px;
             color: var(--text-gold);
-            cursor: pointer; opacity: 0.6; transition: opacity 0.3s;
+            cursor: pointer; opacity: 0.6; transition: all 0.3s;
             z-index: 100; font-size: 1.2rem;
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            border: 1px solid transparent;
         }
-        .audio-control:hover { opacity: 1; text-shadow: 0 0 10px var(--text-gold); }
+        .audio-control:hover { 
+            opacity: 1; 
+            text-shadow: 0 0 10px var(--text-gold); 
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Animación para llamar la atención si no suena */
+        .pulse-attention {
+            animation: pulse 2s infinite;
+            border-color: var(--text-gold);
+            background: rgba(224, 192, 151, 0.2);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(224, 192, 151, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(224, 192, 151, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(224, 192, 151, 0); }
+        }
 
         /* Responsive */
         @media (max-width: 600px) {
@@ -198,10 +219,11 @@
 </head>
 <body>
 
-    <!-- AUDIO: Piano Sentimental / Cinematic -->
-    <audio id="plaza-audio" loop autoplay>
-        <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_51593e9818.mp3?filename=cinematic-piano-125021.mp3" type="audio/mp3">
+    <!-- AUDIO: Piano Emotivo (Enlace nuevo y probado) -->
+    <audio id="plaza-audio" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/11/02/audio_9e3d820f17.mp3?filename=emotional-piano-126245.mp3" type="audio/mp3">
     </audio>
+    
     <div class="audio-control" id="audio-btn">♪</div>
 
     <!-- FONDO LUCIÉRNAGAS -->
@@ -222,11 +244,8 @@
             <div class="tape"></div>
             
             <div class="photo-frame">
-                <!-- ============================================== -->
-                <!-- ¡¡¡ PEGA AQUÍ LA URL DE TU FOTO VERTICAL !!! -->
-                <!-- He puesto una imagen de ejemplo que se parece a tu descripción -->
-                <!-- ============================================== -->
-                <img src="https://photos.app.goo.gl/rCXXHULiPdfeBYmu5" alt="Ella en la plaza">
+                <!-- Tu Foto -->
+                <img src="https://raw.githubusercontent.com/Chovirri/chovirri.github.io/5734d2bfac62d880b670141a34c42879dbf00ea3/Galeria%20de%20fotos/plaza/1f26bfcb270c2bb463c96a0113772bc5_0.jpeg" alt="Ella en la plaza">
             </div>
         </div>
 
@@ -241,26 +260,49 @@
             const audio = document.getElementById('plaza-audio');
             const audioBtn = document.getElementById('audio-btn');
 
-            // Autoplay suave
-            audio.volume = 0.4;
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    // Audio playing
-                }).catch(error => {
-                    audioBtn.textContent = "🔇";
-                });
-            }
+            // Configurar volumen
+            audio.volume = 0.5;
 
+            // Función para intentar reproducir
+            const tryPlay = () => {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Si funciona
+                        audioBtn.textContent = "♪";
+                        audioBtn.classList.remove('pulse-attention');
+                    }).catch(error => {
+                        // Si el navegador bloquea el autoplay
+                        console.log("Autoplay bloqueado. Esperando click del usuario.");
+                        audioBtn.textContent = "🔇";
+                        // Añadir animación para que el usuario sepa que debe dar click
+                        audioBtn.classList.add('pulse-attention');
+                    });
+                }
+            };
+
+            // Intentar reproducir inmediatamente
+            tryPlay();
+
+            // Control manual
             audioBtn.addEventListener('click', () => {
                 if(audio.paused) {
                     audio.play();
                     audioBtn.textContent = "♪";
+                    audioBtn.classList.remove('pulse-attention');
                 } else {
                     audio.pause();
                     audioBtn.textContent = "🔇";
                 }
             });
+            
+            // Si el usuario hace click en cualquier parte de la página, intentar reproducir (truco para autoplay)
+            document.body.addEventListener('click', function initAudio() {
+                if(audio.paused) {
+                    tryPlay();
+                }
+                document.body.removeEventListener('click', initAudio);
+            }, { once: true });
         });
     </script>
 </body>
