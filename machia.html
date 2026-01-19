@@ -4,25 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parque Machia | 13 Oct 2025</title>
-    <link rel="stylesheet" href="style.css">
     
     <style>
-        /* --- ESTILOS ESPECÍFICOS PARA MACHIA (CSS en HTML) --- */
-        
-        /* 1. Cambio de Tema: Sobrescribimos el dorado por Verde Esmeralda */
+        /* --- CSS BASE --- */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap');
+
         :root {
-            --machia-accent: #2ecc71; /* Emerald Green */
+            --bg-color: #0f0f13;
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Lato', sans-serif;
+            
+            /* TEMA MACHIA (Sobrescribe dorado) */
+            --machia-accent: #2ecc71; /* Verde Esmeralda */
             --machia-glow: rgba(46, 204, 113, 0.3);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            /* Fondo ligeramente tintado de verde muy oscuro */
+            /* Fondo verde oscuro naturaleza */
             background: radial-gradient(circle at top, #0f1812 0%, #050505 100%);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        h1, h2, .date-subtitle {
-            color: var(--machia-accent) !important;
-            text-shadow: 0 0 15px var(--machia-glow);
+        /* --- Estilos Comunes Galería --- */
+        .gallery-wrapper {
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .back-btn {
+            align-self: flex-start;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: color 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
         }
 
         .back-btn:hover {
@@ -30,16 +58,41 @@
             border-color: var(--machia-accent);
         }
 
-        /* 2. Estructura Narrativa */
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .gallery-header h1 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            color: var(--machia-accent);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px var(--machia-glow);
+        }
+
+        .date-subtitle {
+            color: var(--machia-accent);
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Estilos Narrativa (Secciones) --- */
         .story-container {
             max-width: 1000px;
-            margin: 0 auto;
+            width: 100%;
             padding-bottom: 5rem;
         }
 
         .story-section {
             margin-bottom: 6rem;
-            opacity: 0; /* Para animación con JS */
+            opacity: 0; /* JS Fade In */
             transform: translateY(30px);
             transition: all 1s ease-out;
         }
@@ -58,6 +111,7 @@
         .section-text h2 {
             font-family: var(--font-title);
             font-size: 1.8rem;
+            color: var(--machia-accent);
             margin-bottom: 0.5rem;
             border-bottom: 1px solid rgba(46, 204, 113, 0.2);
             display: inline-block;
@@ -71,9 +125,7 @@
             margin-top: 10px;
         }
 
-        /* 3. Layouts de Fotos */
-        
-        /* Imágenes generales */
+        /* --- Estilos Imágenes --- */
         img {
             width: 100%;
             height: 100%;
@@ -90,50 +142,55 @@
             z-index: 10;
         }
 
-        /* SECCION 1: PAISAJE (2 Horizontales grandes) */
+        /* --- Layouts Específicos Machia --- */
+        
+        /* Sección 1: Paisaje (2 Horizontales) */
         .grid-landscape {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            height: 350px; /* Altura fija para uniformidad */
+            height: 350px;
         }
 
-        /* SECCION 2: MONOS (3 Horizontales - Estilo Collage) */
+        /* Sección 2: Monos (3 Horizontales - Layout 1 arriba, 2 abajo) */
         .grid-nature {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            grid-template-rows: 250px 250px;
+            /* Primera fila (foto grande) 300px, segunda fila 250px */
+            grid-template-rows: 300px 250px; 
         }
-        /* La primera foto ocupa todo el ancho arriba */
+        /* La primera foto ocupa todo el ancho */
         .grid-nature .photo-box:nth-child(1) {
             grid-column: 1 / -1; 
         }
 
-        /* SECCION 3: MONUMENTO (3 Verticales) */
+        /* Sección 3: Monumento (3 Verticales) */
         .grid-monument {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
-            height: 500px; /* Altura para fotos verticales */
+            height: 500px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            .gallery-header h1 { font-size: 1.8rem; }
             .grid-landscape, .grid-nature, .grid-monument {
                 grid-template-columns: 1fr;
                 height: auto;
                 grid-template-rows: auto;
             }
             .grid-monument img {
-                aspect-ratio: 3/4; /* Forzar aspecto vertical en móvil */
+                aspect-ratio: 3/4; /* Aspecto vertical forzado en móvil */
+                margin-bottom: 1rem;
             }
+            .photo-box { margin-bottom: 1rem; }
         }
     </style>
 </head>
 <body>
     <div class="gallery-wrapper">
-        <!-- Botón Volver -->
         <a href="index.html" class="back-btn">← Volver al Menú</a>
 
         <div class="gallery-header">
@@ -144,69 +201,96 @@
         <div class="story-container">
 
             <!-- SECCIÓN 1: PAISAJE (2 Fotos Horizontales) -->
+            <!-- Contexto: Foto en plano picado desde una colina grande -->
             <section class="story-section scroll-reveal">
                 <div class="section-text">
-                    <h2>La Inmensidad del Valle</h2>
-                    <p>"Desde lo alto, donde el viento susurra historias antiguas y el verde abraza el cielo."</p>
+                    <h2>La Cima del Mundo</h2>
+                    <p>"La vista desde lo alto, donde todo cobra sentido."</p>
                 </div>
                 <div class="grid-landscape">
-                    <!-- FOTO 1: Paisaje Panorámico Picada Alta -->
+                    <!-- Foto 1 Horizontal -->
                     <div class="photo-box">
-                        <img src="Paisaje.jpg" alt="Paisaje Picada Alta 1">
+                        <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/Paisaje.jpg?raw=true" alt="Paisaje Picada Alta 1">
                     </div>
-                    <!-- FOTO 2: Paisaje Panorámico Picada Alta -->
+                    <!-- Foto 2 Horizontal -->
                     <div class="photo-box">
-                        <img src="Galeria de fotos/paisaje2.jpg" alt="Paisaje Picada Alta 2">
+                        <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/paisaje2.jpg?raw=true" alt="Paisaje Picada Alta 2">
                     </div>
                 </div>
             </section>
 
             <!-- SECCIÓN 2: MONOS (3 Fotos Horizontales) -->
+            <!-- Contexto: Monos vistos en los árboles -->
             <section class="story-section scroll-reveal">
                 <div class="section-text">
-                    <h2>Entre Ramas y Sombras</h2>
-                    <p>"Pequeños habitantes curiosos que nos observan desde su hogar natural."</p>
+                    <h2>Habitantes del Bosque</h2>
+                    <p>"Pequeños monos en las ramas jejeje."</p>
                 </div>
                 <div class="grid-nature">
-                    <!-- FOTO 1: Mono Horizontal (Principal) -->
+                    <!-- Foto 1 Horizontal (Grande arriba) -->
                     <div class="photo-box">
-                        <img src="Galeria de fotos/mono1.jpg" alt="Mono en Arbol 1">
+                        <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/mono1.jpg?raw=true" alt="Mono Principal">
                     </div>
-                    <!-- FOTO 2: Mono Horizontal -->
+                    <!-- Foto 2 Horizontal -->
                     <div class="photo-box">
-                        <img src="Galeria de fotos/mono2.jpg" alt="Mono en Arbol 2">
+                        <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/mono2.jpg?raw=true" alt="Mono 2">
                     </div>
-                    <!-- FOTO 3: Mono Horizontal -->
+                    <!-- Foto 3 Horizontal -->
                     <div class="photo-box">
-                        <img src="Galeria de fotos/mono3.jpg" alt="Mono en Arbol 3">
+                        <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/mono3.jpg?raw=true" alt="Mono 3">
                     </div>
                 </div>
             </section>
 
             <!-- SECCIÓN 3: MONUMENTO COCODRILO (3 Fotos Verticales) -->
+            <!-- Contexto: Monumento del cocodrilo -->
             <section class="story-section scroll-reveal">
                 <div class="section-text">
-                    <h2>El Guardián de Piedra</h2>
-                    <p>"El monumento del cocodrilo, testigo silencioso de nuestro paso por el parque."</p>
+                    <h2>El Cocodrilo de Piedra</h2>
+                    <p>"Un recuerdo eterno tallado en el tiempo."</p>
                 </div>
                 <div class="grid-monument">
-                    <!-- FOTO 1: Monumento Vertical -->
+                    <!-- Foto 1 Vertical -->
                     <div class="photo-box">
-                        <img src="Galeria de fotos/cocodrilotomacerca.jpg" alt="Cocodrilo Vertical 1">
+                        <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/cocodrilotomacerca.jpg?raw=true" alt="Cocodrilo Vertical 1">
                     </div>
-                    <!-- FOTO 2: Monumento Vertical -->
+                    <!-- Foto 2 Vertical -->
                     <div class="photo-box">
-                        <img src="Galeria de fotos/cocodrilo2.jpg" alt="Cocodrilo Vertical 2">
+                        <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/cocdrilo2.jpg?raw=true" alt="Cocodrilo Vertical 2">
                     </div>
-                    <!-- FOTO 3: Monumento Vertical -->
+                    <!-- Foto 3 Vertical -->
                     <div class="photo-box">
-                        <img src="Galeria de fotos/cocodrilo3.jpg" alt="Cocodrilo Vertical 3">
+                        <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/cocodirilo%203.jpg?raw=true" alt="Cocodrilo Vertical 3">
                     </div>
                 </div>
             </section>
 
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        /* --- JS INTEGRADO --- */
+        document.addEventListener('DOMContentLoaded', () => {
+            // Scroll Reveal Logic
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+            
+            if (scrollElements.length > 0) {
+                const observerOptions = {
+                    threshold: 0.15,
+                    rootMargin: "0px"
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, observerOptions);
+
+                scrollElements.forEach(el => observer.observe(el));
+            }
+        });
+    </script>
 </body>
 </html>
