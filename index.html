@@ -3,75 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Historia | Menú</title>
-    <link rel="stylesheet" href="style.css">
+    <title>My Love Mine All Mine</title>
+    <style>
+        /* --- ESTILOS INTEGRADOS (MOONLIGHT THEME) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap');
+
+        :root {
+            /* Paleta Mitski / Noche */
+            --bg-night: #050510; /* Azul casi negro */
+            --moon-light: #fdf6e3; /* Blanco cálido luna */
+            --starlight: rgba(255, 255, 255, 0.8);
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --gold-accent: #d4af37; /* Un toque dorado para lo eterno */
+            
+            --font-title: 'Cinzel', serif;
+            --font-quote: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-night);
+            color: var(--moon-light);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* --- FONDO ESTRELLADO (CSS PURO) --- */
+        .stars-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            overflow: hidden;
+        }
+
+        /* Estrellas generadas con box-shadow para rendimiento */
+        .stars {
+            width: 1px; height: 1px;
+            background: transparent;
+            box-shadow: 100px 200px #fff, 300px 500px #fff, 500px 100px #fff, 
+                        700px 300px #fff, 900px 800px #fff, 1100px 400px #fff,
+                        200px 600px #fff, 400px 200px #fff, 600px 700px #fff,
+                        800px 100px #fff, 50px 900px #fff, 1200px 50px #fff;
+            animation: twinkle 5s infinite alternate;
+        }
+        
+        .stars::after {
+            content: " "; position: absolute; top: 2000px; width: 1px; height: 1px;
+            background: transparent;
+            box-shadow: 100px 200px #fff, 300px 500px #fff, 500px 100px #fff, 
+                        700px 300px #fff, 900px 800px #fff, 1100px 400px #fff,
+                        200px 600px #fff, 400px 200px #fff, 600px 700px #fff,
+                        800px 100px #fff, 50px 900px #fff, 1200px 50px #fff;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-20px); }
+        }
+
+        /* --- PANTALLAS --- */
+        .screen {
+            position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh;
+            transition: opacity 1.5s ease-in-out, visibility 1.5s;
+            opacity: 0; visibility: hidden; z-index: 2;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+
+        .screen.active { opacity: 1; visibility: visible; position: relative; }
+        .hidden { display: none; }
+
+        /* --- INTRO: LA LUNA --- */
+        #intro-screen {
+            z-index: 10;
+        }
+
+        /* Efecto Luna */
+        .moon-container {
+            width: 150px; height: 150px;
+            background: var(--moon-light);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(253, 246, 227, 0.4), 
+                        0 0 80px rgba(253, 246, 227, 0.2),
+                        inset -20px -20px 50px rgba(0,0,0,0.1); /* Sombra interna para volumen */
+            margin-bottom: 3rem;
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+        }
+
+        /* Cráteres sutiles */
+        .moon-container::before {
+            content: ''; position: absolute; top: 30%; left: 25%;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: rgba(0,0,0,0.05);
+        }
+        .moon-container::after {
+            content: ''; position: absolute; top: 60%; left: 60%;
+            width: 35px; height: 35px; border-radius: 50%;
+            background: rgba(0,0,0,0.05);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .intro-content { text-align: center; z-index: 2; padding: 0 2rem; }
+
+        .quote-line {
+            font-family: var(--font-quote);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .main-title {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            color: var(--moon-light);
+            margin-bottom: 3rem;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        .btn-moon {
+            background: transparent;
+            color: var(--moon-light);
+            font-family: var(--font-title);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 15px 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-moon:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--moon-light);
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        /* --- MENU SCREEN --- */
+        #menu-screen {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            justify-content: flex-start; /* Permitir scroll */
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        .menu-title {
+            font-family: var(--font-quote);
+            font-size: 1.8rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        .menu-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 10px;
+        }
+
+        /* Grid de Cartas */
+        .menu-container { width: 90%; max-width: 1200px; }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Carta Estilo Cristal */
+        .chapter-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(10px); /* Efecto vidrio esmerilado */
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2.5rem 1.5rem;
+            border-radius: 2px; /* Más cuadrado, más elegante */
+            text-decoration: none;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Hover Effect: Glow interno */
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+            opacity: 0.9;
+            transition: transform 0.6s ease;
+        }
+        
+        .chapter-card:hover .card-icon { transform: scale(1.15); opacity: 1; }
+
+        .card-info h3 {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            color: var(--moon-light);
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+        }
+
+        .card-date {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Animación de entrada para el menú */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 1.8rem; }
+            .quote-line { font-size: 1rem; }
+            .cards-grid { grid-template-columns: 1fr; width: 100%; }
+        }
+        
+        /* Reproductor discreto */
+        .audio-control {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+            z-index: 100;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .audio-control:hover { opacity: 1; }
+
+    </style>
 </head>
 <body>
-    
-    <!-- Audio Background (Opcional, música suave de menú) -->
-    <audio id="bg-music" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=acoustic-guitar-loop-f-91bpm-132687.mp3" type="audio/mp3">
-    </audio>
 
-    <!-- Landing / Intro -->
+    <!-- FONDO ESTRELLADO CONSTANTE -->
+    <div class="stars-container">
+        <div class="stars"></div>
+    </div>
+
+    <!-- AUDIO: Mitski - My Love Mine All Mine (Link de ejemplo, reemplázalo con el real si tienes uno mejor) -->
+    <!-- NOTA: Usa un archivo local o un link directo a mp3. Aquí pongo un placeholder funcional de piano melancólico similar. -->
+    <audio id="bg-music" loop>
+        <source src="https://github.com/Chovirri/chovirri.github.io/raw/refs/heads/main/Musica/Indexm/Lana_-_My_love_mine_all_mine_(mp3.pm).mp3" type="audio/mp3">
+    </audio>
+    <div class="audio-control" id="audio-toggle">♪</div>
+
+    <!-- PANTALLA 1: INTRO (LA LUNA) -->
     <section id="intro-screen" class="screen active">
-        <div class="background-overlay"></div>
+        
+        <div class="moon-container"></div>
+        
         <div class="intro-content">
-            <h1 class="main-title">Nuestra Cápsula</h1>
-            <p class="subtitle">5 Momentos, 1 Historia Eterna</p>
-            <button id="open-capsule-btn" class="btn-gold">Abrir Recuerdos</button>
+            <!-- Frase inspirada en Mitski -->
+            <p class="quote-line">"Nada en el mundo me pertenece, salvo el amor..."</p>
+            <h1 class="main-title">My Love Mine All Mine</h1>
+            
+            <button id="open-capsule-btn" class="btn-moon">Ver Recuerdos</button>
         </div>
     </section>
 
-    <!-- Menú de Capítulos -->
+    <!-- PANTALLA 2: MENÚ (RECUERDOS) -->
     <section id="menu-screen" class="screen hidden">
         <div class="menu-container">
-            <h2 class="menu-title">Selecciona un Momento</h2>
+            
+            <div class="menu-header">
+                <h2 class="menu-title">Nuestra Historia</h2>
+                <p class="menu-subtitle">Bajo la misma luna, siempre</p>
+            </div>
             
             <div class="cards-grid">
                 
                 <!-- 1. Machia -->
-                <a href="machia.html" class="chapter-card">
+                <a href="machia.html" class="chapter-card" style="animation-delay: 0.1s;">
                     <div class="card-icon">🌿</div>
                     <div class="card-info">
-                        <h3>Visita Parque Machia</h3>
-                        <span class="card-date">Lunes 13 de Octubre, 2025</span>
+                        <h3>Parque Machía</h3>
+                        <span class="card-date">13 Octubre 2025</span>
                     </div>
                 </a>
 
                 <!-- 2. Plaza -->
-                <a href="plaza.html" class="chapter-card">
+                <a href="plaza.html" class="chapter-card" style="animation-delay: 0.2s;">
                     <div class="card-icon">⛲</div>
                     <div class="card-info">
-                        <h3>Foto en la Plaza</h3>
-                        <span class="card-date">Lunes 20 de Octubre, 2025</span>
+                        <h3>En la Plaza</h3>
+                        <span class="card-date">20 Octubre 2025</span>
                     </div>
                 </a>
 
                 <!-- 3. Hormiga -->
-                <a href="hormiga.html" class="chapter-card">
+                <a href="hormiga.html" class="chapter-card" style="animation-delay: 0.3s;">
                     <div class="card-icon">🐜</div>
                     <div class="card-info">
                         <h3>Parque Hormiga</h3>
-                        <span class="card-date">Jueves 23 de Octubre, 2025</span>
+                        <span class="card-date">23 Octubre 2025</span>
                     </div>
                 </a>
 
                 <!-- 4. Cumpleaños -->
-                <a href="cumple.html" class="chapter-card">
+                <a href="cumple.html" class="chapter-card" style="animation-delay: 0.4s;">
                     <div class="card-icon">✨</div>
                     <div class="card-info">
-                        <h3>Tu Cumpleaños :)</h3>
-                        <span class="card-date">Martes 4 de Noviembre, 2025</span>
+                        <h3>Tu Cumpleaños</h3>
+                        <span class="card-date">4 Noviembre 2025</span>
                     </div>
                 </a>
 
                 <!-- 5. Cita -->
-                <a href="cita.html" class="chapter-card">
+                <a href="cita.html" class="chapter-card" style="animation-delay: 0.5s;">
                     <div class="card-icon">🥂</div>
                     <div class="card-info">
-                        <h3>Nuestra Cita &lt;3</h3>
-                        <span class="card-date">Miércoles 10 de Diciembre, 2025</span>
+                        <h3>Nuestra Cita</h3>
+                        <span class="card-date">10 Diciembre 2025</span>
                     </div>
                 </a>
 
@@ -79,6 +357,62 @@
         </div>
     </section>
 
-    <script src="javascrip.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const introScreen = document.getElementById('intro-screen');
+            const menuScreen = document.getElementById('menu-screen');
+            const openBtn = document.getElementById('open-capsule-btn');
+            const bgMusic = document.getElementById('bg-music');
+            const audioToggle = document.getElementById('audio-toggle');
+
+            // Función para iniciar la experiencia
+            if (openBtn) {
+                openBtn.addEventListener('click', () => {
+                    // 1. Fade out de la luna e intro
+                    introScreen.style.opacity = '0';
+                    introScreen.style.transform = 'scale(1.1)'; // Efecto de zoom suave hacia adentro
+                    
+                    // 2. Reproducir música (User interaction allows autoplay)
+                    if(bgMusic) {
+                        bgMusic.volume = 0.4; // Volumen suave
+                        bgMusic.play().then(() => {
+                            console.log("Música iniciada correctamente.");
+                        }).catch(e => console.log("Navegador bloqueó el autoplay, se requiere click extra."));
+                    }
+
+                    setTimeout(() => {
+                        // 3. Cambiar de pantalla
+                        introScreen.classList.remove('active');
+                        introScreen.classList.add('hidden');
+                        
+                        menuScreen.classList.remove('hidden');
+                        
+                        // Pequeño delay para permitir que el DOM renderice antes de aplicar opacidad
+                        setTimeout(() => {
+                            menuScreen.classList.add('active');
+                            
+                            // Animar entrada de cartas en cascada
+                            const cards = document.querySelectorAll('.chapter-card');
+                            cards.forEach((card, index) => {
+                                card.style.opacity = '0';
+                                card.style.animation = `fadeUp 0.8s ease forwards ${index * 0.15 + 0.5}s`;
+                            });
+                        }, 50);
+                    }, 1200); // Esperar a que termine la transición CSS (1.5s pero cortamos un poco antes para fluidez)
+                });
+            }
+            
+            // Control de audio simple
+            audioToggle.addEventListener('click', () => {
+                if(bgMusic.paused) {
+                    bgMusic.play();
+                    audioToggle.style.opacity = '1';
+                } else {
+                    bgMusic.pause();
+                    audioToggle.style.opacity = '0.3';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

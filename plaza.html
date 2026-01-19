@@ -4,24 +4,264 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>En la Plaza | 20 Oct 2025</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* --- ESTILOS EXCLUSIVOS PLAZA --- */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;1,400&family=Lato:wght@300;400&display=swap');
+
+        :root {
+            --bg-deep: #0a0a0f;
+            --text-gold: #e0c097;
+            --frame-glow: rgba(224, 192, 151, 0.15);
+            --font-title: 'Cinzel', serif;
+            --font-quote: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: #fff;
+            font-family: var(--font-body);
+            height: 100vh;
+            overflow: hidden; /* Evitar scroll, centrar atención en la foto */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FONDO ANIMADO (LUCIÉRNAGAS) --- */
+        .fireflies {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+            overflow: hidden;
+        }
+
+        .firefly {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00;
+            opacity: 0;
+            animation: fly 10s infinite ease-in-out;
+        }
+
+        /* Generamos varias luciérnagas con delays distintos */
+        .firefly:nth-child(1) { top: 20%; left: 10%; animation-duration: 8s; animation-delay: 0s; }
+        .firefly:nth-child(2) { top: 60%; left: 80%; animation-duration: 12s; animation-delay: 2s; }
+        .firefly:nth-child(3) { top: 40%; left: 40%; animation-duration: 10s; animation-delay: 1s; }
+        .firefly:nth-child(4) { top: 80%; left: 20%; animation-duration: 15s; animation-delay: 4s; }
+        .firefly:nth-child(5) { top: 10%; left: 90%; animation-duration: 9s; animation-delay: 3s; }
+        .firefly:nth-child(6) { top: 50%; left: 50%; animation-duration: 14s; animation-delay: 5s; }
+
+        @keyframes fly {
+            0% { transform: translate(0, 0) scale(0); opacity: 0; }
+            20% { opacity: 1; }
+            50% { transform: translate(20px, -40px) scale(1.2); opacity: 0.8; }
+            80% { opacity: 1; }
+            100% { transform: translate(-20px, -80px) scale(0); opacity: 0; }
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px; /* Ancho máximo para retrato */
+            padding: 20px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: -60px; left: 0;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .back-btn:hover {
+            color: var(--text-gold);
+            border-color: var(--text-gold);
+            background: rgba(224, 192, 151, 0.05);
+        }
+
+        /* --- MARCO DE LA FOTO (EL ALTAR) --- */
+        .photo-frame-container {
+            position: relative;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: emerge 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.5s;
+        }
+
+        .photo-frame {
+            position: relative;
+            padding: 15px 15px 50px 15px; /* Estilo Polaroid suave */
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px var(--frame-glow);
+            transform: rotate(-2deg); /* Ligera inclinación natural */
+            transition: transform 6s ease-in-out;
+            animation: floatPhoto 8s infinite ease-in-out;
+        }
+
+        /* La imagen en sí */
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            max-height: 60vh; /* Que no ocupe toda la pantalla */
+            object-fit: cover;
+            border-radius: 2px;
+            filter: sepia(20%) contrast(1.1) brightness(0.95); /* Tono nostálgico */
+            display: block;
+        }
+
+        /* Cinta adhesiva decorativa (opcional, detalle bonito) */
+        .tape {
+            position: absolute;
+            top: -15px; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 30px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        @keyframes emerge {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes floatPhoto {
+            0%, 100% { transform: rotate(-2deg) translateY(0); }
+            50% { transform: rotate(-1deg) translateY(-10px); }
+        }
+
+        /* --- TEXTO DEDICATORIA --- */
+        .dedication {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInText 2s ease forwards 1.5s;
+        }
+
+        .dedication h1 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: var(--text-gold);
+            margin-bottom: 0.8rem;
+            text-shadow: 0 0 10px rgba(224, 192, 151, 0.4);
+        }
+
+        .dedication p {
+            font-family: var(--font-quote);
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            font-style: italic;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- AUDIO CONTROL --- */
+        .audio-control {
+            position: fixed; bottom: 30px; right: 30px;
+            color: var(--text-gold);
+            cursor: pointer; opacity: 0.6; transition: opacity 0.3s;
+            z-index: 100; font-size: 1.2rem;
+        }
+        .audio-control:hover { opacity: 1; text-shadow: 0 0 10px var(--text-gold); }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .photo-frame img { max-height: 55vh; }
+            .dedication h1 { font-size: 1.5rem; }
+            .dedication p { font-size: 0.95rem; }
+            .back-btn { top: -50px; left: 20px; }
+        }
+
+    </style>
 </head>
 <body>
-    <div class="gallery-wrapper">
-        <a href="index.html" class="back-btn">← Volver al Menú</a>
 
-        <div class="gallery-header">
-            <h1>Foto en la Plaza</h1>
-            <p class="date-subtitle">Lunes 20 de Octubre, 2025</p>
+    <!-- AUDIO: Piano Sentimental / Cinematic -->
+    <audio id="plaza-audio" loop autoplay>
+        <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_51593e9818.mp3?filename=cinematic-piano-125021.mp3" type="audio/mp3">
+    </audio>
+    <div class="audio-control" id="audio-btn">♪</div>
+
+    <!-- FONDO LUCIÉRNAGAS -->
+    <div class="fireflies">
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+        <div class="firefly"></div>
+    </div>
+
+    <div class="content-wrapper">
+        <a href="index.html" class="back-btn">← Volver</a>
+
+        <div class="photo-frame-container">
+            <!-- Cinta decorativa -->
+            <div class="tape"></div>
+            
+            <div class="photo-frame">
+                <!-- ============================================== -->
+                <!-- ¡¡¡ PEGA AQUÍ LA URL DE TU FOTO VERTICAL !!! -->
+                <!-- He puesto una imagen de ejemplo que se parece a tu descripción -->
+                <!-- ============================================== -->
+                <img src="https://photos.app.goo.gl/rCXXHULiPdfeBYmu5" alt="Ella en la plaza">
+            </div>
         </div>
 
-        <div class="ghost-container">
-            <div class="ghost-icon">⛲</div>
-            <h2>Galería en Espera</h2>
-            <p>Esperando configuración de imágenes...</p>
-            <p class="ghost-details">Verticales: ? | Horizontales: ?</p>
+        <div class="dedication">
+            <h1>En la Plaza</h1>
+            <p>"El mundo seguía girando a nuestro alrededor, pero en mi cámara, y en mi memoria, el tiempo se detuvo justo aquí."</p>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('plaza-audio');
+            const audioBtn = document.getElementById('audio-btn');
+
+            // Autoplay suave
+            audio.volume = 0.4;
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Audio playing
+                }).catch(error => {
+                    audioBtn.textContent = "🔇";
+                });
+            }
+
+            audioBtn.addEventListener('click', () => {
+                if(audio.paused) {
+                    audio.play();
+                    audioBtn.textContent = "♪";
+                } else {
+                    audio.pause();
+                    audioBtn.textContent = "🔇";
+                }
+            });
+        });
+    </script>
 </body>
 </html>

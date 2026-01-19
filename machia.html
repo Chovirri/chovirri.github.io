@@ -19,12 +19,13 @@
             /* TEMA MACHIA (Sobrescribe dorado) */
             --machia-accent: #2ecc71; /* Verde Esmeralda */
             --machia-glow: rgba(46, 204, 113, 0.3);
+            --glass-bg: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Fondo verde oscuro naturaleza */
+            /* Fondo verde oscuro naturaleza profunda */
             background: radial-gradient(circle at top, #0f1812 0%, #050505 100%);
             color: var(--text-main);
             font-family: var(--font-body);
@@ -39,6 +40,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Fondo de partículas sutiles (opcional, para dar vida) */
+        .ambient-dust {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.4;
         }
 
         .back-btn {
@@ -47,39 +58,55 @@
             text-decoration: none;
             font-size: 0.9rem;
             margin-bottom: 2rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 50px;
+            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.2);
         }
 
         .back-btn:hover {
             color: var(--machia-accent);
             border-color: var(--machia-accent);
+            background: rgba(46, 204, 113, 0.1);
         }
 
         .gallery-header {
             text-align: center;
-            margin-bottom: 4rem;
-            animation: fadeIn 1s ease;
+            margin-bottom: 5rem;
+            animation: fadeIn 1.5s ease;
+            position: relative;
+        }
+
+        .gallery-header::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--machia-accent), transparent);
+            margin: 20px auto 0;
+            opacity: 0.5;
         }
 
         .gallery-header h1 {
             font-family: var(--font-title);
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--machia-accent);
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 15px var(--machia-glow);
+            text-shadow: 0 0 20px var(--machia-glow);
+            letter-spacing: 2px;
         }
 
         .date-subtitle {
-            color: var(--machia-accent);
-            letter-spacing: 2px;
-            opacity: 0.8;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -87,14 +114,14 @@
         .story-container {
             max-width: 1000px;
             width: 100%;
-            padding-bottom: 5rem;
+            padding-bottom: 8rem;
         }
 
         .story-section {
-            margin-bottom: 6rem;
+            margin-bottom: 8rem;
             opacity: 0; /* JS Fade In */
-            transform: translateY(30px);
-            transition: all 1s ease-out;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .story-section.visible {
@@ -104,42 +131,54 @@
 
         .section-text {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             padding: 0 1rem;
         }
 
         .section-text h2 {
             font-family: var(--font-title);
-            font-size: 1.8rem;
-            color: var(--machia-accent);
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(46, 204, 113, 0.2);
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
             display: inline-block;
-            padding-bottom: 10px;
         }
 
         .section-text p {
             font-family: var(--font-body);
-            color: #ccc;
+            color: var(--machia-accent);
             font-style: italic;
-            margin-top: 10px;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
         /* --- Estilos Imágenes --- */
+        .photo-box {
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        /* Borde sutil brillante */
+        .photo-box::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 2; pointer-events: none;
+        }
+
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.5s ease;
-            filter: brightness(0.8) contrast(1.1);
+            transition: transform 0.8s ease, filter 0.8s ease;
+            filter: brightness(0.85) contrast(1.05) saturate(0.9);
         }
 
-        img:hover {
-            transform: scale(1.02);
-            filter: brightness(1) contrast(1);
-            z-index: 10;
+        /* Efecto hover elegante */
+        .photo-box:hover img {
+            transform: scale(1.05);
+            filter: brightness(1) contrast(1) saturate(1.1);
         }
 
         /* --- Layouts Específicos Machia --- */
@@ -148,19 +187,17 @@
         .grid-landscape {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            height: 350px;
+            gap: 30px;
+            height: 400px;
         }
 
-        /* Sección 2: Monos (3 Horizontales - Layout 1 arriba, 2 abajo) */
+        /* Sección 2: Monos (3 Horizontales - Collage) */
         .grid-nature {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            /* Primera fila (foto grande) 300px, segunda fila 250px */
-            grid-template-rows: 300px 250px; 
+            gap: 20px;
+            grid-template-rows: 350px 250px; 
         }
-        /* La primera foto ocupa todo el ancho */
         .grid-nature .photo-box:nth-child(1) {
             grid-column: 1 / -1; 
         }
@@ -169,96 +206,124 @@
         .grid-monument {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            height: 500px;
+            gap: 20px;
+            height: 550px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .gallery-header h1 { font-size: 1.8rem; }
+            .gallery-header h1 { font-size: 2.2rem; }
             .grid-landscape, .grid-nature, .grid-monument {
                 grid-template-columns: 1fr;
                 height: auto;
                 grid-template-rows: auto;
             }
+            .grid-landscape { gap: 15px; }
+            .grid-nature { gap: 15px; }
+            .grid-monument { gap: 15px; }
+            
             .grid-monument img {
-                aspect-ratio: 3/4; /* Aspecto vertical forzado en móvil */
-                margin-bottom: 1rem;
+                aspect-ratio: 3/4; 
             }
-            .photo-box { margin-bottom: 1rem; }
+            .photo-box { margin-bottom: 0; } /* Reset margin cause grid handles gap */
         }
+
+        /* --- Audio Player Control --- */
+        .audio-control {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--machia-accent);
+            color: var(--machia-accent);
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            font-size: 1rem;
+        }
+        .audio-control:hover {
+            background: var(--machia-accent);
+            color: #000;
+            box-shadow: 0 0 15px var(--machia-glow);
+        }
+        
     </style>
 </head>
 <body>
+
+    <!-- AUDIO DE FONDO: Acústico suave / Folk / Naturaleza -->
+    <!-- Elegí una pista de guitarra acústica suave y emotiva -->
+    <audio id="page-audio" loop autoplay>
+        <source src="https://cdn.pixabay.com/download/audio/2022/08/02/audio_884fe92c21.mp3?filename=acoustic-guitars-ambient-uplifting-music-116545.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Botón flotante de audio -->
+    <div class="audio-control" id="audio-btn">♪</div>
+
+    <!-- Capa de ruido visual suave -->
+    <div class="ambient-dust"></div>
+
     <div class="gallery-wrapper">
-        <a href="index.html" class="back-btn">← Volver al Menú</a>
+        <a href="index.html" class="back-btn">← Regresar</a>
 
         <div class="gallery-header">
-            <h1>Visita Parque Machia</h1>
+            <h1>Parque Machía</h1>
             <p class="date-subtitle">Lunes 13 de Octubre, 2025</p>
         </div>
 
         <div class="story-container">
 
-            <!-- SECCIÓN 1: PAISAJE (2 Fotos Horizontales) -->
-            <!-- Contexto: Foto en plano picado desde una colina grande -->
+            <!-- SECCIÓN 1: PAISAJE -->
             <section class="story-section scroll-reveal">
                 <div class="section-text">
                     <h2>La Cima del Mundo</h2>
-                    <p>"La vista desde lo alto, donde todo cobra sentido."</p>
+                    <p>"Donde el verde se funde con el cielo y el tiempo se detiene."</p>
                 </div>
                 <div class="grid-landscape">
-                    <!-- Foto 1 Horizontal -->
                     <div class="photo-box">
                         <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/Paisaje.jpg?raw=true" alt="Paisaje Picada Alta 1">
                     </div>
-                    <!-- Foto 2 Horizontal -->
                     <div class="photo-box">
                         <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/paisaje2.jpg?raw=true" alt="Paisaje Picada Alta 2">
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN 2: MONOS (3 Fotos Horizontales) -->
-            <!-- Contexto: Monos vistos en los árboles -->
+            <!-- SECCIÓN 2: MONOS -->
             <section class="story-section scroll-reveal">
                 <div class="section-text">
-                    <h2>Habitantes del Bosque</h2>
-                    <p>"Pequeños monos en las ramas jejeje."</p>
+                    <h2>Nuestros Pequeños Testigos</h2>
+                    <p>"Entre las ramas nos observaban, curiosos y libres."</p>
                 </div>
                 <div class="grid-nature">
-                    <!-- Foto 1 Horizontal (Grande arriba) -->
                     <div class="photo-box">
                         <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/mono1.jpg?raw=true" alt="Mono Principal">
                     </div>
-                    <!-- Foto 2 Horizontal -->
                     <div class="photo-box">
                         <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/mono2.jpg?raw=true" alt="Mono 2">
                     </div>
-                    <!-- Foto 3 Horizontal -->
                     <div class="photo-box">
                         <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/mono3.jpg?raw=true" alt="Mono 3">
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN 3: MONUMENTO COCODRILO (3 Fotos Verticales) -->
-            <!-- Contexto: Monumento del cocodrilo -->
+            <!-- SECCIÓN 3: MONUMENTO -->
             <section class="story-section scroll-reveal">
                 <div class="section-text">
-                    <h2>El Cocodrilo de Piedra</h2>
-                    <p>"Un recuerdo eterno tallado en el tiempo."</p>
+                    <h2>El Guardián de Piedra</h2>
+                    <p>"Momentos sólidos que perdurarán más allá de la distancia."</p>
                 </div>
                 <div class="grid-monument">
-                    <!-- Foto 1 Vertical -->
                     <div class="photo-box">
                         <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/cocodrilotomacerca.jpg?raw=true" alt="Cocodrilo Vertical 1">
                     </div>
-                    <!-- Foto 2 Vertical -->
                     <div class="photo-box">
                         <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/cocdrilo2.jpg?raw=true" alt="Cocodrilo Vertical 2">
                     </div>
-                    <!-- Foto 3 Vertical -->
                     <div class="photo-box">
                         <img src="https://github.com/Chovirri/chovirri.github.io/blob/main/Galeria%20de%20fotos/cocodirilo%203.jpg?raw=true" alt="Cocodrilo Vertical 3">
                     </div>
@@ -269,27 +334,55 @@
     </div>
 
     <script>
-        /* --- JS INTEGRADO --- */
         document.addEventListener('DOMContentLoaded', () => {
-            // Scroll Reveal Logic
+            
+            // --- 1. Control de Audio ---
+            const audio = document.getElementById('page-audio');
+            const audioBtn = document.getElementById('audio-btn');
+            
+            // Intentar reproducir automáticamente
+            audio.volume = 0.5; // Volumen medio
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay started
+                    audioBtn.style.opacity = '1';
+                }).catch(error => {
+                    // Autoplay prevented
+                    console.log("Autoplay prevenido. Esperando interacción.");
+                    audioBtn.textContent = "🔇"; // Indicar que está muteado/pausado
+                });
+            }
+
+            audioBtn.addEventListener('click', () => {
+                if(audio.paused) {
+                    audio.play();
+                    audioBtn.textContent = "♪";
+                } else {
+                    audio.pause();
+                    audioBtn.textContent = "🔇";
+                }
+            });
+
+
+            // --- 2. Scroll Reveal Animations ---
             const scrollElements = document.querySelectorAll('.scroll-reveal');
             
-            if (scrollElements.length > 0) {
-                const observerOptions = {
-                    threshold: 0.15,
-                    rootMargin: "0px"
-                };
+            const observerOptions = {
+                threshold: 0.1, // Un poco antes para que se sienta más fluido
+                rootMargin: "0px"
+            };
 
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                }, observerOptions);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
 
-                scrollElements.forEach(el => observer.observe(el));
-            }
+            scrollElements.forEach(el => observer.observe(el));
         });
     </script>
 </body>
